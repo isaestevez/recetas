@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+   
+    <title>Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_css_bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="text-center">
+    <main class="form-signin shadow-lg p-3 mb-6" >
+      <form id="formLogin" action="/login" method="POST" >
+        <img
+          class="mb-4"
+          src="img/logoConin.jpeg"
+          alt=""
+          width="80%"
+          height="70%"
+        />
+        <h1 class="h3 mb-3 fw-normal">Por favor, registrese</h1>
+
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="user"
+            name="user"
+            placeholder="Usuario"
+          />
+          <label for="user">Usuario</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            name="pass"
+            id="pass"
+            placeholder="Contraseña"
+          />
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+
+        <div class="checkbox mb-3">
+        </div>
+
+        <button class="w-100 btn btn-lg btn btn-success" type="submit">
+          Iniciar sesión
+        </button>
+      </form>
+      <br>
+      <a href="/register" class="w-100 btn btn-lg btn-bd-primary">Registrarse</a>
+    </main>
+    <!-- Es para el cartel para informar que fue un alta exitosa, lo saque de la pagina: https://sweetalert2.github.io/-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+
+      <!-- Como recibir parametros con ejs, en la pagina esta todo: https://ejs.co/#install -->
+      <% if(typeof alert != 'undefined') { %> 
+        <script>
+            Swal.fire({
+                title: "<%= alertTitle %>",
+                text: "<%= alertMessage %>",
+                icon: "<%= alertIcon %>",
+                showConfirmButton: <%= showConfirmButton %>,
+                timer: <%= timer %>
+            }).then(() => {
+                window.location="/<%= ruta %>";
+            });
+        </script>
+    <% } %>
+
+  </body>
+</html>
