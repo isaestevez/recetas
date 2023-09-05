@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conin Recetas</title>
+    <!-- Bootstrap core CSS -->
+    <link
+      href="css/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_css_bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/signin.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+        body {
+          align-items: center;
+          padding-top: 40px;
+          padding-bottom: 40px;
+          background-color: rgba(255, 255, 255, 0.95);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="welcome-heading"><strong>Bienvenidos</strong></h1>
+      <div class="logo">
+        <img
+          class="mb-4"
+          src="img/logo1.jpeg"
+          alt=""
+          width="80%"
+          height="70%"
+        />
+      </div>
+      <!-- cuando usamos estos simbolos indica que estamos enviando variables de entorno desde nodejs: <%= %> -->
+      <% if(!login) { %>
+         <!-- si no esta loggeado, crear un boton para ir al login -->
+      <h1><%= name %></h1>
+      <a href="login" class="a-login">Ir al LOGIN</a>
+      <% } %>
+     
+    </div>
+
+    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+  </body>
+</html>

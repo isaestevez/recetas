@@ -1,4 +1,4 @@
-//Aqui vamos a crear los procedimientos para controlar toda nuestra logica en cuanto a la registracion, el login, la autenticacion
+//Aca vamos a crear los procedimientos para controlar toda nuestra logica en cuanto a la registracion, el login, la autenticacion
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 const connection = require("../database/db.js");
@@ -6,6 +6,7 @@ const connection = require("../database/db.js");
 //vamos a utilizar una comunicacion asyncrona, es algo que la funcion nos va a devolver, si tenemos una promesa que
 //nos devuelva, retornara, puede ser favorable, o que no funcione correctamente, reject
 const { promisify } = require("util");
+const multer = require('multer'); //es para guardar  bien la imagen
 
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
@@ -22,8 +23,20 @@ exports.register = async (req, res) => {
       "INSERT INTO users SET ?",
       { user: user, name: name, pass: passHash },
       (error, results) => {
-        if (error) console.log(error);
-        res.redirect("/");
+        if (error) {
+          console.log(error);
+        } else {
+          // valores que recibe la plantilla register mediante un objecto
+          res.render("register", {
+            alert: true,
+            alertTitle: "Registration",
+            alertMessage: "¡Successful Registration!",
+            alertIcon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+            ruta: "homePage",
+          });
+        }
       }
     );
   } catch (error) {
@@ -47,74 +60,154 @@ exports.login = async (req, res) => {
         ruta: "login",
       });
     } else {
-        connection.query("SELECT * FROM users WHERE user = ?", [user], async (error, results) => {
-             //preguntamos si el usuario esta vacio? o no encontramos la password -> (await bcryptjs.compare(pass, results[0].pass)) ->
-             // esta en la documentacion: npmjs.com/package/bcryptjs
-             if(user.length === 0 || !(await bcryptjs.compare(pass, results[0].pass))) {
-                res.render("login", {
-                    alert: true,
-                    alertTitle: "Error",
-                    alertMessage: "Usuario y/o Contraseña Incorrectas",
-                    alertIcon: "error",
-                    showConfirmButton: true,
-                    timer: false,
-                    ruta: "login"
-                  });
-             } else {
-                //Inicio de sesion OK, generar el jwt -> documentacion: npmjs.com/package/jsonwebtoken
-                const id = results[0].id;
-                const token = jwt.sign({id:id}, process.env.JWT_SECRETO, {
-                    expiresIn: process.env.JWT_TIEMPO_EXPIRA
-                })
-                //generamos token SIN fecha de expiracion
-                //const token = jwt.sign({id:id}, process.env.JWT_SECRETO)
-                console.log("TOKEN: "+token+" para el USUARIO: "+user);
-                //configurar las cookies
-                const cookiesOptions = {
-                    expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 + 1000),
-                    httpOnly: true
-                }
-                res.cookie("jwt", token, cookiesOptions);
-                //Cartel de Login Correcto
-                res.render("login", {
-                    alert: true,
-                    alertTitle: "Conexión exitosa",
-                    alertMessage: "¡Login Correcto!",
-                    alertIcon: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    ruta: "" //vacio porque despues va a redirigir a la pagina principal
-                  });
-             }
-        })
+      connection.query(
+        "SELECT * FROM users WHERE user = ?",
+        [user],
+        async (error, results) => {
+          //preguntamos si el usuario esta vacio? o no encontramos la password -> (await bcryptjs.compare(pass, results[0].pass)) ->
+          // esta en la documentacion: npmjs.com/package/bcryptjs
+          if (
+            user.length === 0 ||
+            !results[0] ||
+            !(await bcryptjs.compare(pass, results[0].pass))
+          ) {
+            res.render("login", {
+              alert: true,
+              alertTitle: "Error",
+              alertMessage: "Usuario y/o Contraseña Incorrectas",
+              alertIcon: "error",
+              showConfirmButton: true,
+              timer: false,
+              ruta: "login",
+            });
+          } else {
+            //Inicio de sesion OK, generar el jwt -> documentacion: npmjs.com/package/jsonwebtoken
+            const id = results[0].id;
+            const token = jwt.sign({ id: id }, process.env.JWT_SECRETO, {
+              expiresIn: process.env.JWT_TIEMPO_EXPIRA,
+            });
+            //generamos token SIN fecha de expiracion
+            //const token = jwt.sign({id:id}, process.env.JWT_SECRETO)
+            console.log("TOKEN: " + token + " para el USUARIO: " + user);
+            //configurar las cookies
+            const cookiesOptions = {
+              expires: new Date(
+                Date.now() +
+                  process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 +
+                  1000
+              ),
+              httpOnly: true,
+            };
+            res.cookie("jwt", token, cookiesOptions);
+            //Cartel de Login Correcto
+            res.render("login", {
+              alert: true,
+              alertTitle: "Conexión exitosa",
+              alertMessage: "¡Login Correcto!",
+              alertIcon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+              ruta: "", //vacio porque despues va a redirigir a la pagina principal
+            });
+          }
+        }
+      );
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-exports.isAuthenticated = async (req, res, next) => { 
-    if(req.cookies.jwt) {
-        try {
-            const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO);
-            //chequear para ver si el usuario esta en la db
-            connection.query("SELECT * FROM users WHERE id = ?", [decodificada.id], (error, results) => {
-                //el next() esta explicado en la documentacion, es un middleware: expressjs.com
-                if(!results){return next()}
-                req.user = results[0]
-                return next()
-            })
-        } catch (error) {
-            console.log(error)
-            return next()
+exports.isAuthenticated = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      const decodificada = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRETO
+      );
+      //chequear para ver si el usuario esta en la db
+      connection.query(
+        "SELECT * FROM users WHERE id = ?",
+        [decodificada.id],
+        (error, results) => {
+          //el next() esta explicado en la documentacion, es un middleware: expressjs.com
+          if (!results) {
+            return next();
+          }
+          req.user = results[0];
+          return next();
         }
-    } else {
-        //si no esta autenticado, redirige al login
-        res.redirect("/login");
+      );
+    } catch (error) {
+      console.log(error);
+      return next();
     }
+  } else {
+    //si no esta autenticado, redirige al login
+    res.redirect("/homePage");
+  }
+};
+
+//12- Auth pages
+exports.homePage = (req, res) => {
+  if (!req.user) {
+    res.render("homePage", {
+      login: false,
+      name: "Debe iniciar sesión",
+    });
+  }
+};
+
+//para agregar recetas
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, '/img') // Carpeta de destino para las imágenes
+  },
+  filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname)
+  }
+});
+
+const upload = multer({ storage: storage });
+
+exports.addReceta = (req, res) => {
+  try {
+    const { nombre, descripcion, ingredientes, instrucciones } = req.body;
+    const imagen = req.file.filename; // Nombre del archivo de imagen cargado
+
+    // Crear un objeto con los datos de la receta
+    const nuevaReceta = {
+      nombre,
+      descripcion,
+      ingredientes,
+      instrucciones,
+      imagen,
+    };
+
+    // Insertar la receta en la base de datos
+    connection.query(
+      "INSERT INTO recetas SET ?",
+      nuevaReceta,
+      (error, result) => {
+        if (error) {
+          console.error("Error al agregar la receta: " + error.message);
+          // Maneja el error de alguna manera, por ejemplo, mostrar un mensaje de error al usuario.
+        } else {
+          res.redirect("/");
+          console.log("Receta agregada con éxito");
+          // Redirige al usuario a una página de éxito o a donde prefieras.
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.logout = (req, res) => {
-    res.clearCookie("jwt")
-    return res.redirect("/")
-}
+  res.clearCookie("jwt");
+  return res.redirect("/homePage");
+};
+
+
+exports.upload = upload; // Exportar multer upload

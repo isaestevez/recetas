@@ -24,15 +24,13 @@ app.use(cookieParse());
 app.use("/", require("./router/router.js"));
 
 //para eliminar el cache y que  no se pueda volver con el boton de back luego de que hacemos un LOGOUT
-// app.use(funcion(req, res, next) {
-//     if (!req.user) 
-//         res.header("Cache-Control", "private, no-cahce, no-store, must-revalidate");
-//         next()
+app.use(function(req, res, next) {
+    if (!req.user) {
+        res.header("Cache-Control", "private, no-cahce, no-store, must-revalidate");
+    }
+    next(); 
+});
     
-// })
-
-
-
 
 
 

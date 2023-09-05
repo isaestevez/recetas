@@ -2,7 +2,60 @@
 .btn-bd-primary:hover, .btn-bd-primary:active{font-weight: 600;color: #fff;background-color: #972228;border-radius: #972228;}
 .btn-bd-primary:focus{box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);}
 
+body {
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
 .img-logo {
-    width: 10%;
-    height: 10%;
+    width: 20%;
+    height: 20%;
 }
+
+/* HOMEPAGE */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo img {
+    width: 30%;
+    height: 40%;
+}
+
+.welcome-heading {
+    margin-bottom: 20px;
+}
+
+.a-login {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d13c3c;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.a-login:hover {
+    color: #ffffff;
+    background-color: #b92f2f;
+}
+
+@media (max-width: 768px) {
+    /* Styles for screens with a maximum width of 768px */
+    .container {
+        padding: 10px;
+    }
+    .logo img {
+        width: 60%;
+        height: 50%;
+    }
+}
+
+
+
+
+

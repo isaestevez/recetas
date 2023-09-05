@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Agregar Receta</title>
+    <!-- Bootstrap CSS -->
+    <link href="css/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_css_bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Agregar Receta</h1>
+        <form action="/agregar-recetas" method="POST" id="agregarRecetaForm" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre de la Receta:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="ingredientes" class="form-label">Ingredientes:</label>
+                <textarea class="form-control" id="ingredientes" name="ingredientes" rows="4"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="instrucciones" class="form-label">Instrucciones:</label>
+                <textarea class="form-control" id="instrucciones" name="instrucciones" rows="4"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen de la receta</label>
+                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Receta</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS y jQuery (asegúrate de incluirlos al final del documento) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript personalizado -->
+    <script src="js/agregarReceta.js"></script>
+</body>
+</html>
+

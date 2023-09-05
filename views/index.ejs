@@ -3,16 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <title>Conin Recetas</title>
 
+    <title>Index</title>
 
     <!-- Bootstrap core CSS -->
     <link
       href="css/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_css_bootstrap.min.css"
       rel="stylesheet"
     />
-    <link href="css/styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
 
     <style>
       .bd-placeholder-img {
@@ -28,61 +30,440 @@
           font-size: 3.5rem;
         }
       }
+      /* navbar {
+    transition: all 0.5s;
+  } */
+      .col a {
+        text-decoration: none;
+        color: rgb(55 65 81 / var(--tw-text-opacity));
+      }
+      .titulo {
+        text-align: center;
+        font-family: Poppins;
+        --tw-text-opacity: 1;
+        color: rgb(0 0 0 / var(--tw-text-opacity));
+        margin-bottom: 20px;
+      }
+      /* Estilos para el footer */
+      .containerFooter {
+        background-color: #972228;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+      /* Estilos para los íconos sociales */
+      .social a {
+        color: white;
+        font-size: 24px;
+        margin: 0 10px;
+        text-decoration: none; /* Quita la subrayado en los enlaces */
+      }
+      /* Estilos para el texto de derechos de autor */
+      .containerFooter p {
+        margin: 10px 0; /* Añade espacio arriba y abajo del texto de derechos de autor */
+      }
     </style>
 
     <!-- Custom styles for this template -->
-    <link href="css/navbar-top-fixed.css" rel="stylesheet" />
+    <link href="css/carousel.css" rel="stylesheet" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <!-- <a class="navbar-brand" href="#"></a> -->
-        <img src="img/logoConin.jpeg" class="img-logo"/>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
+    <header>
+      <nav
+        class="navbar navbar-expand-md navbar-dark fixed-top"
+        style="background-color: #972228"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <i class="bi bi-egg-fried">Conin - Comida Saludable</i>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Recetas</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Trucos de cocina</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Consejos de salud</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/agregar-recetas">Ingresar recetas</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success me-3" type="submit">
+                Buscar
+              </button>
+              <a class="btn btn-outline-success" href="/logout">CerrarSesion</a>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="img/logo1.jpeg" class="d-block img-fluid" alt="image1" />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="img/niñosArcoirisConin.jpeg"
+              class="d-block img-fluid"
+              alt="image2"
             />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="img/actividadesConin.jpeg"
+              class="d-block img-fluid"
+              alt="image3"
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <!-- ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+    
+      <div class="container marketing">
+        <h1 class="titulo">Recetas Saludables</h1>
+
+        <!--Cada se agregan las Card recetas dinamicas-->
+      <div class="container">
+        <div class="row" id="tarjetas-container-dinamicas">
+            <!-- Las tarjetas de recetas se agregarán aca -->
+            <!-- Utiliza un bucle para mostrar todas las recetas -->
+            <% if (recetas && recetas.length > 0) { %>
+            <% recetas.forEach((receta) => { %>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="<%= receta.imagen %>" class="img-fluid" alt="<%= receta.nombre %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= receta.nombre %></h5>
+                            <p class="card-text"><%= receta.descripcion %></p>
+                            <!-- Agrega más contenido de la receta aca -->
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+            <% } %>
+        </div>
+    </div>
+    
+        <!--Aca las estaticas-->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <a
+              href="#"
+              class="card-link"
+              data-bs-titulo="Título de la Receta"
+              data-bs-imagen="img/mariscada_3ba77eca31.webp"
+              data-bs-descripcion="Descripción de la receta."
+              data-bs-ingredientes="Ingredientes de la receta."
+              data-bs-instrucciones="Instrucciones de preparación de la receta."
+            >
+              <div class="card h-100">
+                <img
+                  src="img/mariscada_3ba77eca31.webp"
+                  class="card-img-top"
+                  alt="img1"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Mariscada Gallega</h5>
+                  <p class="card-text">
+                    Como preparar la mariscada gallega perfecta.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a
+              href="#"
+              class="card-link"
+              data-bs-titulo="Título de la Receta"
+              data-bs-imagen="img/torrijas_keto_sanas_3d0c9803d1.webp"
+              data-bs-descripcion="Descripción de la receta."
+              data-bs-ingredientes="Ingredientes de la receta."
+              data-bs-instrucciones="Instrucciones de preparación de la receta."
+            >
+              <div class="card h-100">
+                <img
+                  src="img/torrijas_keto_sanas_3d0c9803d1.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a short card.</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/guisos_alubias_blancas_espinacas_fea0b36b23.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/pollo_asado_platanos_verdes_82653d9b00.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/ensalada_fria_almidon_resistente_saludable_db23319ea0.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/huevo_3_formas_de_hacerlo_80a98b58b1.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/PIZZA_DE_PISTO_verduras_22cb2d0904.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/espirales_sin_gluten_saludables_cocina_sana_ee6aab0d2f.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/polos_de_gazpacho_nutritivo_6f1415d105.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#">
+              <div class="card h-100">
+                <img
+                  src="img/torrijas_keto_sanas_3d0c9803d1.webp"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a longer card with supporting text below as a
+                    natural lead-in to additional content. This content is a
+                    little bit longer.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-    </nav>
 
-    <main class="container">
+      <hr class="featurette-divider" />
+      <!-- FOOTER -->
+      <footer class="containerFooter">
+        <div class="social">
+          <a href="https://www.facebook.com/familiaconin.cdg"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a href="ninezconesperanza@gmail.com"
+            ><i class="bi bi-envelope-at"></i
+          ></a>
+        </div>
+        <p>&copy; 2023 - Fundación Conin &middot;</p>
+      </footer>
+    </main>
+
+    <!-- Modal reutilizable -->
+    <div
+      class="modal fade"
+      id="recetaModal"
+      tabindex="-1"
+      aria-labelledby="recetaModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalRecetaTitulo"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img src="" id="modalRecetaImagen" class="img-fluid" alt="Receta" />
+            <p id="modalRecetaDescripcion"></p>
+            <p id="modalRecetaIngredientes"></p>
+            <p id="modalRecetaInstrucciones"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/modalDetalleRecetas.js"></script>
+    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+<!-- <main class="container">
       <div class="bg-light p-5 rounded">
         <h1>Recetas</h1>
-       
+        <h2>Bienvenido
+        <% if(user) { %>
+          <span class="badge bg-success"><%= user.name %></span>
+        <% } %>  
+      </h2>  
       </div>
     </main>
 
     <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
   </body>
-</html>
+</html> -->

@@ -26,15 +26,11 @@
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
-        }
+        } rgba(255, 255, 255, 0.95);
       } */
-      body {
-        align-items: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: rgba(255, 255, 255, 0.95);
-      }
+      
     </style> 
+    
   </head>
   <body class="text-center">
     <div class="container">
@@ -47,20 +43,20 @@
                             <form action="/register" method="POST">
                                 <div class="mb-3">
                                 <label for="name" class="form-label">Nombre Completo</label>
-                                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+                                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="user" class="form-label">Cuenta de usuario</label>
-                                    <input type="text" class="form-control" id="user" name="user" aria-describedby="emailHelp">
+                                    <input type="text" class="form-control" id="user" name="user" aria-describedby="emailHelp" required>
                                 </div>
                                 <div class="mb-3">
                                 <label for="pass" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="pass" name="pass">
+                                <input type="password" class="form-control" id="pass" name="pass" required>
                                 </div>
                             
                         </div>
                         <div class="card-footer bg-transparent border-success">
-                            <a href="/" type="button" class="btn btn-secondary">Cancelar</a>
+                            <a href="/login" type="button" class="btn btn-secondary">Cancelar</a>
                             <button type="submit" class="btn btn-success">Registrar</button>
                         </div>
                         </form>
@@ -68,6 +64,23 @@
             </div>
         </div>
     </div>
+    <!-- Es para el cartel para informar que fue un alta exitosa, lo saque de la pagina: https://sweetalert2.github.io/
+     de aca nos vamos a app.js la parte del post para que funcione-->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+    <!-- Como recibir parametros con ejs, en la pagina esta todo: https://ejs.co/#install -->
+    <% if(typeof alert != 'undefined') { %> 
+      <script>
+          Swal.fire({
+              title: "<%= alertTitle %>",
+              text: "<%= alertMessage %>",
+              icon: "<%= alertIcon %>",
+              showConfirmButton: <%= showConfirmButton %>,
+              timer: <%= timer %>
+          }).then(() => {
+              window.location="/<%= ruta %>";
+          });
+      </script>
+  <% } %>
   </body>
 </html>
