@@ -6,7 +6,7 @@ const connection = require("../database/db.js");
 //vamos a utilizar una comunicacion asyncrona, es algo que la funcion nos va a devolver, si tenemos una promesa que
 //nos devuelva, retornara, puede ser favorable, o que no funcione correctamente, reject
 const { promisify } = require("util");
-const multer = require('multer'); //es para guardar  bien la imagen
+
 
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
@@ -148,7 +148,17 @@ exports.isAuthenticated = async (req, res, next) => {
   }
 };
 
+
 //12- Auth pages
+// exports.homePage = (req, res) => {
+//   if (!req.user) {
+//     res.render("homePage", {
+//       login: false,
+//       name: "Debe iniciar sesión",
+//     });
+//   }
+// };
+
 exports.homePage = (req, res) => {
   if (!req.user) {
     res.render("homePage", {
@@ -158,56 +168,36 @@ exports.homePage = (req, res) => {
   }
 };
 
-//para agregar recetas
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      cb(null, '/img') // Carpeta de destino para las imágenes
-  },
-  filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname)
-  }
-});
-
-const upload = multer({ storage: storage });
-
-exports.addReceta = (req, res) => {
+ exports.addReceta = (req, res) => {
+  console.log(req.body);
   try {
     const { nombre, descripcion, ingredientes, instrucciones } = req.body;
-    const imagen = req.file.filename; // Nombre del archivo de imagen cargado
-
-    // Crear un objeto con los datos de la receta
-    const nuevaReceta = {
-      nombre,
-      descripcion,
-      ingredientes,
-      instrucciones,
-      imagen,
-    };
-
-    // Insertar la receta en la base de datos
+    const imagen = req.file.filename; // Nombre de la imagen subida
+  
+    // Inserta la receta en la base de datos
     connection.query(
-      "INSERT INTO recetas SET ?",
-      nuevaReceta,
-      (error, result) => {
-        if (error) {
-          console.error("Error al agregar la receta: " + error.message);
-          // Maneja el error de alguna manera, por ejemplo, mostrar un mensaje de error al usuario.
+      "INSERT INTO recetas (nombre, descripcion, ingredientes, instrucciones, imagen) VALUES (?, ?, ?, ?, ?)",
+      [nombre, descripcion, ingredientes, instrucciones, imagen],
+      (err, result) => {
+        if (err) {
+          console.error("Error al guardar la receta: " + err.message);
+          res.status(500).send("Error al guardar la receta.");
         } else {
-          res.redirect("/");
-          console.log("Receta agregada con éxito");
-          // Redirige al usuario a una página de éxito o a donde prefieras.
+          console.log("Receta guardada con éxito");
+          res.redirect("/"); // Redirige a la página principal
         }
       }
     );
+  
+
   } catch (error) {
     console.log(error);
   }
+
 };
+
 
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
   return res.redirect("/homePage");
 };
-
-
-exports.upload = upload; // Exportar multer upload

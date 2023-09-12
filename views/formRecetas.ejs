@@ -6,33 +6,40 @@
     <title>Agregar Receta</title>
     <!-- Bootstrap CSS -->
     <link href="css/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_css_bootstrap.min.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5">Agregar Receta</h1>
-        <form action="/agregar-recetas" method="POST" id="agregarRecetaForm" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre de la Receta:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
-            </div>
-            <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción:</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="4"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="ingredientes" class="form-label">Ingredientes:</label>
-                <textarea class="form-control" id="ingredientes" name="ingredientes" rows="4"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="instrucciones" class="form-label">Instrucciones:</label>
-                <textarea class="form-control" id="instrucciones" name="instrucciones" rows="4"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="imagen" class="form-label">Imagen de la receta</label>
-                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Agregar Receta</button>
-        </form>
+        <div>
+            <h1 class="mt-5">Agregar Receta</h1>
+            <form action="/guardar-receta" method="POST" id="agregarRecetaForm" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre de la Receta:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción:</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="ingredientes" class="form-label">Ingredientes:</label>
+                    <textarea class="form-control" id="ingredientes" name="ingredientes" rows="4"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="instrucciones" class="form-label">Instrucciones:</label>
+                    <textarea class="form-control" id="instrucciones" name="instrucciones" rows="4"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen:</label>
+                    <input type="file" name="imagen" accept="image/*" required>
+                </div>
+                <div class="card-footer bg-transparent border-success">
+                    <a href="/" type="button" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Agregar Receta</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Bootstrap JS y jQuery (asegúrate de incluirlos al final del documento) -->
