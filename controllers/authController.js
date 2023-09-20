@@ -15,13 +15,13 @@ exports.register = async (req, res) => {
     const user = req.body.user;
     //esta es la password que ingresado de texto plano, abajo en passwordHaash lo capturamos y la encriptamos
     const pass = req.body.pass;
-    // console.log(name + " - " + user + " - " + pass)
+    const rolId = req.body.rol; 
     //aca tenemos que guardar la contraseña encriptada
     const passHash = await bcryptjs.hash(pass, 8); //8 de iteracion
     //aqui hacemos la consulta a la base de datos para capturar la data ingresada
     connection.query(
       "INSERT INTO users SET ?",
-      { user: user, name: name, pass: passHash },
+      { user: user, name: name, pass: passHash, rol_id: rolId },
       (error, results) => {
         if (error) {
           console.log(error);
@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
             alertIcon: "success",
             showConfirmButton: false,
             timer: 1500,
-            ruta: "homePage",
+            ruta: "login",
           });
         }
       }
@@ -81,6 +81,11 @@ exports.login = async (req, res) => {
               ruta: "login",
             });
           } else {
+            // Verifica si el usuario es administrador (suponiendo que el ID de administrador es 1)
+            // if (results[0].rol_id === 1) {
+            //   // Si es administrador, establece una variable de sesión o cookie para identificarlo como administrador
+            //   req.session.isAdmin = true; // Esto es solo un ejemplo, puedes ajustarlo a tu sistema de manejo de sesiones
+            // }
             //Inicio de sesion OK, generar el jwt -> documentacion: npmjs.com/package/jsonwebtoken
             const id = results[0].id;
             const token = jwt.sign({ id: id }, process.env.JWT_SECRETO, {
@@ -148,17 +153,6 @@ exports.isAuthenticated = async (req, res, next) => {
   }
 };
 
-
-//12- Auth pages
-// exports.homePage = (req, res) => {
-//   if (!req.user) {
-//     res.render("homePage", {
-//       login: false,
-//       name: "Debe iniciar sesión",
-//     });
-//   }
-// };
-
 exports.homePage = (req, res) => {
   if (!req.user) {
     res.render("homePage", {
@@ -184,7 +178,17 @@ exports.homePage = (req, res) => {
           res.status(500).send("Error al guardar la receta.");
         } else {
           console.log("Receta guardada con éxito");
-          res.redirect("/"); // Redirige a la página principal
+          // valores que recibe la plantilla formulario mediante un objecto
+          res.render("formRecetas", {
+            alert: true,
+            alertTitle: "Saved Recipe",
+            alertMessage: "¡Recipe saved Successfully!",
+            alertIcon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+            ruta: "",
+          });
+         
         }
       }
     );
@@ -196,8 +200,27 @@ exports.homePage = (req, res) => {
 
 };
 
-
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
   return res.redirect("/homePage");
 };
+
+exports.deleteRecipe = (req, res) => {
+  const recetaId = req.params.id;
+  const userId = req.user.id; // Supongamos que guardas el ID del usuario en la sesión
+
+  // Verificar si la receta pertenece al usuario actual o es administrador
+  const sql = `DELETE FROM recetas WHERE id = ? AND (user_id = ? OR 'administrador' = ?)`;
+  connection.query(sql, [recetaId, userId, req.user.rol], (err, result) => {
+    if (err) {
+      console.error("Error al eliminar la receta: " + err.message);
+      return res.status(500).send("Error al eliminar la receta");
+    }
+    if (result.affectedRows === 0) {
+      // No se eliminó ninguna receta, tal vez no tenía permiso
+      return res.status(403).send("No tienes permiso para eliminar esta receta.");
+    }
+    // La receta se eliminó correctamente
+    res.redirect("/"); // O redirige a otra página
+  });
+}

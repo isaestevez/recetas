@@ -15,64 +15,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     />
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      /* navbar {
-    transition: all 0.5s;
-  } */
-      .col a {
-        text-decoration: none;
-        color: rgb(55 65 81 / var(--tw-text-opacity));
-      }
-      .titulo {
-        text-align: center;
-        font-family: Poppins;
-        --tw-text-opacity: 1;
-        color: rgb(0 0 0 / var(--tw-text-opacity));
-        margin-bottom: 20px;
-      }
-      /* CSS para las dinamicas */
-      .card-link {
-      height: 100%; /* Establece una altura fija para las tarjetas dinámicas */
-      }
-      /* Estilos para el footer */
-      .containerFooter {
-        background-color: #972228;
-        color: white;
-        padding: 20px 0;
-        text-align: center;
-      }
-      /* Estilos para los íconos sociales */
-      .social a {
-        color: white;
-        font-size: 24px;
-        margin: 0 10px;
-        text-decoration: none; /* Quita la subrayado en los enlaces */
-      }
-      /* Estilos para el texto de derechos de autor */
-      .containerFooter p {
-        margin: 10px 0; /* Añade espacio arriba y abajo del texto de derechos de autor */
-      }
-    </style>
-
-    <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+    
   </head>
   <body>
     <header>
+      <!-- NAVBAR -> BARRA DE BUSQUEDA -->
       <nav
         class="navbar navbar-expand-md navbar-dark fixed-top"
         style="background-color: #972228"
@@ -110,25 +59,24 @@
               </li>
             </ul>
             <!-- Para la busqueda de recetas -->
-            <!-- 1-Agrega el atributo name para enviar el término de búsqueda -->
-            <form class="d-flex" action="/buscar-recetas" method="GET">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                name="query" 
-              />
-              <button class="btn btn-outline-success me-3" type="submit">
-                Buscar
-              </button>
-              <a class="btn btn-outline-success" href="/logout">CerrarSesion</a>
+            <!-- 1-Agrega el atributo name para enviar el término de búsqueda 
+                 2-agrego un id para manejar en js la busqueda -->
+            <form class="d-flex"> 
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  name="query"
+                  id="inputSearch" 
+                />
+                <a class="btn btn-outline-success" href="/logout">CerrarSesion</a>
             </form>
           </div>
         </div>
       </nav>
     </header>
-
+    <!-- CARRUSEL, 3 FOTOS -->
     <main>
       <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
@@ -171,14 +119,155 @@
       </div>
 
       <!-- ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+      <!--CARDS DINAMICAS DE LA BASE DE DATOS -->
 
       <div class="container marketing">
         <h1 class="titulo">Recetas Saludables</h1>
 
-        <!--Aca las estaticas-->
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
+          
+          <!--Aca las dinamicas trayendolas desde la base de datos-->
+          <% recetasDB.forEach(function(receta) { %>
+            <div class="col">
+                <a
+                  href="#"
+                  class="card-link"
+                  data-bs-receta-id="<%= receta.idRecetas %>"
+                  data-bs-titulo="<%= receta.nombre %>"
+                  data-bs-imagen="<%= receta.imagen_url %>"
+                  data-bs-descripcion="<%= receta.descripcion %>"
+                  data-bs-ingredientes="<%= receta.ingredientes %>"
+                  data-bs-instrucciones="<%= receta.instrucciones %>"
+                  data-origin="base-de-datos"
+                >
+                  <div class="card h-100">
+                    <img
+                      src="<%= receta.imagen_url %>"
+                      class="card-img-top"
+                      alt="<%= receta.nombre %>"
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title"><%= receta.nombre %></h5>
+                      <p class="card-text"><%= receta.descripcion %></p>
+                    </div>
+                  </div>
+                </a>
+            </div>
+          <% }); %>
+
+           <!-- Loop para mostrar las recetas dinámicas agregadas desde el formulario -->
+              <% recetasFormulario.forEach(function(receta) { %>
+                <div class="col">
+                    <a
+                      href="#"
+                      class="card-link"
+                      data-bs-receta-id="<%= receta.idRecetas %>"
+                      data-bs-titulo="<%= receta.nombre %>"
+                      data-bs-imagen="/img/img-form/<%= receta.imagen %>"
+                      data-bs-descripcion="<%= receta.descripcion %>"
+                      data-bs-ingredientes="<%= receta.ingredientes %>"
+                      data-bs-instrucciones="<%= receta.instrucciones %>"
+                      data-origin="formulario"
+                    >
+                      <div class="card h-100">
+                        <img
+                          src="/img/img-form/<%= receta.imagen %>"
+                          class="card-img-top"
+                          alt="<%= receta.nombre %>"
+                        />
+                        <div class="card-body">
+                          <h5 class="card-title"><%= receta.nombre %></h5>
+                          <p class="card-text"><%= receta.descripcion %></p>
+                        </div>
+                      </div>
+                    </a>
+                </div>
+              <% }); %>
+
+              <!-- Contenedor para los resultados de búsqueda -->
+              <div id="search-result"></div>
+           
+        </div>
+      </div>
+
+      <hr class="featurette-divider" />
+      <!-- FOOTER -->
+      <footer class="containerFooter">
+        <div class="social">
+          <a href="https://www.facebook.com/familiaconin.cdg"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a href="ninezconesperanza@gmail.com"
+            ><i class="bi bi-envelope-at"></i
+          ></a>
+        </div>
+        <p>&copy; 2023 - Fundación Conin &middot;</p>
+      </footer>
+    </main>
+
+    <!-- Modal reutilizable -->
+    <div
+      class="modal fade"
+      id="recetaModal"
+      tabindex="-1"
+      aria-labelledby="recetaModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalRecetaTitulo"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img src="" id="modalRecetaImagen" class="img-fluid" alt="Receta" />
+            <p id="modalRecetaDescripcion"></p>
+            <p id="modalRecetaIngredientes"></p>
+            <p id="modalRecetaInstrucciones"></p>
+          </div>
+          <div class="modal-footer">
+            <button 
+              type="button" 
+              class="btn btn-outline-danger" 
+              id="eliminarRecetaButton"
+              data-bs-dismiss="modal"
+            >
+              Eliminar Receta
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+</div>
+
+    <!-- <script src="js/agregarReceta.js" ></script> -->
+    <script src="js/modalDetalleRecetas.js"></script>
+    <script src="js/busquedaRecetas.js"></script>
+    <script src="js/eliminarRecetas.js"></script>
+    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+    
+  </body>
+</html>
+
+
+
+
+<!-- <div class="col">
             <a
               href="#"
               class="card-link"
@@ -445,101 +534,4 @@
                 </div>
               </div>
             </a>
-          </div>
-
-           <!-- Loop para mostrar las recetas dinámicas -->
-            
-              <% recetas.forEach(function(receta) { %>
-                <div class="col">
-                  <a
-                    href="#"
-                    class="card-link"
-                    data-bs-receta-id="<%= receta.idRecetas %>"
-                    data-bs-titulo="<%= receta.nombre %>"
-                    data-bs-imagen="/img/img-form/<%= receta.imagen %>"
-                    data-bs-descripcion="<%= receta.descripcion %>"
-                    data-bs-ingredientes="<%= receta.ingredientes %>"
-                    data-bs-instrucciones="<%= receta.instrucciones %>"
-                  >
-                    <div class="card h-100">
-                      <img
-                        src="/img/img-form/<%= receta.imagen %>"
-                        class="card-img-top"
-                        alt="<%= receta.nombre %>"
-                      />
-                      <div class="card-body">
-                        <h5 class="card-title"><%= receta.nombre %></h5>
-                        <p class="card-text"><%= receta.descripcion %></p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              <% }); %>
-           
-        </div>
-      </div>
-
-      <hr class="featurette-divider" />
-      <!-- FOOTER -->
-      <footer class="containerFooter">
-        <div class="social">
-          <a href="https://www.facebook.com/familiaconin.cdg"
-            ><i class="bi bi-facebook"></i
-          ></a>
-          <a href="ninezconesperanza@gmail.com"
-            ><i class="bi bi-envelope-at"></i
-          ></a>
-        </div>
-        <p>&copy; 2023 - Fundación Conin &middot;</p>
-      </footer>
-    </main>
-
-
-
-    <!-- Modal reutilizable -->
-    <div
-      class="modal fade"
-      id="recetaModal"
-      tabindex="-1"
-      aria-labelledby="recetaModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalRecetaTitulo"></h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <img src="" id="modalRecetaImagen" class="img-fluid" alt="Receta" />
-            <p id="modalRecetaDescripcion"></p>
-            <p id="modalRecetaIngredientes"></p>
-            <p id="modalRecetaInstrucciones"></p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-success"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-</div>
-</div>
-
-    <!-- <script src="js/agregarReceta.js" ></script> -->
-    <script src="js/modalDetalleRecetas.js"></script>
-    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
-    
-  </body>
-</html>
+          </div> -->

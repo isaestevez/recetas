@@ -14,7 +14,7 @@ app.set("view engine", "ejs");
 app.use(express.static('public'));
 // app.use(express.static(path.join(__dirname, 'public')));
 
-//para agregar recetas
+//para agregar imagenes para las recetas
 //middlewares
 const storage = multer.diskStorage({
     destination: path.join(__dirname, './public/img/img-form'),

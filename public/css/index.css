@@ -1,0 +1,52 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+.col a {
+    text-decoration: none;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+  }
+  .titulo {
+    text-align: center;
+    font-family: Poppins;
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    margin-bottom: 20px;
+  }
+  /* CSS para las dinamicas */
+  .card-link {
+  height: 100%; /* Establece una altura fija para las tarjetas dinámicas */
+  }
+  .card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombreado suave */
+  }
+  
+  /* Estilos para el footer */
+  .containerFooter {
+    background-color: #972228;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  /* Estilos para los íconos sociales */
+  .social a {
+    color: white;
+    font-size: 24px;
+    margin: 0 10px;
+    text-decoration: none; /* Quita la subrayado en los enlaces */
+  }
+  /* Estilos para el texto de derechos de autor */
+  .containerFooter p {
+    margin: 10px 0; /* Añade espacio arriba y abajo del texto de derechos de autor */
+  }

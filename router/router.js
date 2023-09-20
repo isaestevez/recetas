@@ -7,22 +7,40 @@ const connection = require("../database/db.js");
 
 //router para las vistas
 router.get("/", authController.isAuthenticated, (req, res) => {
-  // Consulta SQL para obtener todas las recetas
+  // Consulta SQL para obtener todas las recetas de la base de datos mediante el formulario
   const sql = "SELECT * FROM recetas";
 
+  // Consulta SQL para obtener todas las recetas ingresadas mediante el formulario
+  const sqlDB = "SELECT * FROM recetas_base_datos";
+
+  // Arreglos para almacenar recetas
+  let recetasDB = [];
+  let recetasFormulario = [];
+
+  //Aca se guardan las recetas en la base de datos ingresadas en el formulario y se muestran en el index.ejs
   connection.query(sql, (err, results) => {
     if (err) {
-      console.error("Error al obtener las recetas" + err.message);
+      console.error("Error al obtener las recetas del formulario" + err.message);
       return res.status(500).send("Error al obtener las recetas");
     } else {
       // Los resultados de la consulta se encuentran en results
-      const recetas = results;
+      recetasFormulario = results;
 
-      // Renderiza la página principal (index.ejs) y pasa las recetas
-      res.render("index", { user: req.user, recetas: recetas });
+      // Consulta para recetas ingresadas mediante el formulario
+      connection.query(sqlDB, (err, resultDB) => {
+        if(err) {
+          console.error("Error al obtener las recetas de la base de datos: " + err.message);
+          return res.status(500).send("Error al obtener las recetas");
+        } else {
+          recetasDB = resultDB;
+          // Renderiza la página principal (index.ejs) y pasa las recetas
+          res.render("index", { user: req.user, recetasDB, recetasFormulario });
+        }
+      }); 
     }
   });
 });
+
 
 router.get("/login", (req, res) => {
   res.render("login", { alert: false });
@@ -32,35 +50,22 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-// Agrega un nuevo endpoint de búsqueda de recetas
-// app.get('/buscar-recetas', (req, res) => {
-//   const query = req.query.query; // Obtiene el término de búsqueda desde la URL
-//   // Realiza la búsqueda en la base de datos utilizando el término de búsqueda
-//   // Devuelve los resultados como JSON
-//   // Por ejemplo:
-//   const resultados = buscarRecetasEnLaBaseDeDatos(query);
-//   res.json(resultados);
-// });
-
 // Ruta para mostrar el formulario de agregar recetas
 router.get("/agregar-recetas", (req, res) => {
   res.render("formRecetas");
 });
 
-
 // Ruta para procesar el formulario y agregar la receta a la base de datos
-router.post(
-  "/guardar-receta",
-  // upload.single("imagen"),
-  authController.addReceta
-);
+router.post("/guardar-receta",authController.addReceta);
+
 //router para los metodos del controller
 router.get("/homePage", authController.homePage);
 router.post("/login", authController.login);
 router.post("/register", authController.register);
 router.get("/logout", authController.logout);
 
+// Ruta para eliminar una receta
+router.post("/eliminar-receta/:id", authController.isAuthenticated, authController.deleteRecipe);
+
 
 module.exports = router;
-
-

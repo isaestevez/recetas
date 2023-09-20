@@ -4,8 +4,8 @@
 
 body {
     align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     background-color: rgba(255, 255, 255, 0.95);
   }
 
@@ -55,7 +55,11 @@ body {
     }
 }
 
-
+@media (min-width: 769px) {
+    .form-signin {
+      padding: 15px; /* Restaura el valor original para pantallas grandes */
+    }
+  }
 
 
 
