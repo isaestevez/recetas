@@ -10,7 +10,9 @@
 
         const titulo = this.getAttribute("data-bs-titulo");
         const imagen = this.getAttribute("data-bs-imagen");
-        const descripcion = this.getAttribute("data-bs-descripcion");
+        const descripcion = this.getAttribute("data-bs-descripcion"); //esta es tipo_receta
+        const dificultad = this.getAttribute("data-bs-dificultad");
+        const tiempo = this.getAttribute("data-bs-tiempo");
         const ingredientes = this.getAttribute("data-bs-ingredientes");
         const instrucciones = this.getAttribute("data-bs-instrucciones");
 
@@ -18,9 +20,11 @@
         // Actualizar el contenido del modal con los datos de la tarjeta clicada
         document.getElementById("modalRecetaTitulo").textContent = titulo;
         document.getElementById("modalRecetaImagen").src = imagen;
-        document.getElementById("modalRecetaDescripcion").textContent = descripcion;
-        // document.getElementById("modalRecetaIngredientes").innerHTML = `${ingredientes}<br>`;
-        // document.getElementById("modalRecetaInstrucciones").textContent = instrucciones;
+        document.getElementById("modalRecetaTipoReceta").textContent = descripcion; //esta es tipo_receta
+        document.getElementById("modalRecetaDificultadReceta").textContent = dificultad;
+        document.getElementById("modalRecetaTiempoCoccion").textContent = "Tiempo de cocción: " + tiempo;
+     
+        //para ubicarlos prolijo y uno abajo de otro con un punto en cada items
         let ingredientesList = document.getElementById("modalRecetaIngredientes");
         ingredientesList.innerHTML = "<h6>Ingredientes:</h6>";
         let ingredientesArray = ingredientes.split("\n");

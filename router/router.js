@@ -51,7 +51,7 @@ router.get("/register", (req, res) => {
 });
 
 // Ruta para mostrar el formulario de agregar recetas
-router.get("/agregar-recetas", (req, res) => {
+router.get("/agregar-recetas", authController.checkRole(["admin"]), (req, res) => {
   res.render("formRecetas");
 });
 
@@ -64,8 +64,7 @@ router.post("/login", authController.login);
 router.post("/register", authController.register);
 router.get("/logout", authController.logout);
 
-// Ruta para eliminar una receta
-router.post("/eliminar-receta/:id", authController.isAuthenticated, authController.deleteRecipe);
-
+// Ruta para eliminar recetas
+router.get("/eliminar-receta/:id", authController.eliminarReceta);
 
 module.exports = router;

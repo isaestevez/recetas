@@ -54,9 +54,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Consejos de salud</a>
               </li>
+              <% if(user && user.rol === 'admin') { %>
               <li class="nav-item">
                 <a class="nav-link" href="/agregar-recetas">Ingresar recetas</a>
               </li>
+              <% } %>
             </ul>
             <!-- Para la busqueda de recetas -->
             <!-- 1-Agrega el atributo name para enviar el término de búsqueda 
@@ -78,22 +80,22 @@
     </header>
     <!-- CARRUSEL, 3 FOTOS -->
     <main>
-      <div id="carouselExample" class="carousel slide">
+      <div id="carouselExample" class="carousel slide container" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="img/logo1.jpeg" class="d-block img-fluid" alt="image1" />
+            <img src="img/logo1.jpeg" class="figure-img img-fluid img-thumbnail" alt="image1" />
           </div>
           <div class="carousel-item">
             <img
               src="img/niñosArcoirisConin.jpeg"
-              class="d-block img-fluid"
+              class="figure-img img-fluid img-thumbnail"
               alt="image2"
             />
           </div>
           <div class="carousel-item">
             <img
               src="img/imagenCarrusel.webp"
-              class="d-block img-fluid"
+              class="figure-img img-fluid img-thumbnail"
               alt="image3"
             />
           </div>
@@ -135,7 +137,9 @@
                   data-bs-receta-id="<%= receta.idRecetas %>"
                   data-bs-titulo="<%= receta.nombre %>"
                   data-bs-imagen="<%= receta.imagen_url %>"
-                  data-bs-descripcion="<%= receta.descripcion %>"
+                  data-bs-descripcion="<%= receta.tipo_receta %>"
+                  data-bs-dificultad="<%= receta.dificultad_receta %>"
+                  data-bs-tiempo="<%= receta.tiempo_coccion %>"
                   data-bs-ingredientes="<%= receta.ingredientes %>"
                   data-bs-instrucciones="<%= receta.instrucciones %>"
                   data-origin="base-de-datos"
@@ -148,10 +152,19 @@
                     />
                     <div class="card-body">
                       <h5 class="card-title"><%= receta.nombre %></h5>
-                      <p class="card-text"><%= receta.descripcion %></p>
+                      <p class="card-text"><%= receta.tipo_receta %></p>
                     </div>
+                </a>   
+                <% if(user && user.rol === "admin") { %>
+                    <button
+                      class="btn btn-outline-danger eliminar-receta"
+                      data-receta-id="<%= receta.idDB %>"
+                      data-tabla="recetas_base_datos"
+                    >
+                      Eliminar Recetas
+                    </button>
+                <% } %>    
                   </div>
-                </a>
             </div>
           <% }); %>
 
@@ -164,7 +177,9 @@
                       data-bs-receta-id="<%= receta.idRecetas %>"
                       data-bs-titulo="<%= receta.nombre %>"
                       data-bs-imagen="/img/img-form/<%= receta.imagen %>"
-                      data-bs-descripcion="<%= receta.descripcion %>"
+                      data-bs-descripcion="<%= receta.tipo_receta %>"
+                      data-bs-dificultad="<%= receta.dificultad_receta %>"
+                      data-bs-tiempo="<%= receta.tiempo_coccion %>"
                       data-bs-ingredientes="<%= receta.ingredientes %>"
                       data-bs-instrucciones="<%= receta.instrucciones %>"
                       data-origin="formulario"
@@ -177,11 +192,21 @@
                         />
                         <div class="card-body">
                           <h5 class="card-title"><%= receta.nombre %></h5>
-                          <p class="card-text"><%= receta.descripcion %></p>
+                          <p class="card-text"><%= receta.tipo_receta %></p>
                         </div>
+                    </a>  
+                    <% if(user && user.rol === "admin") { %>
+                        <button
+                          class="btn btn-outline-danger eliminar-receta"
+                          data-receta-id="<%= receta.idRecetas %>"
+                          data-tabla="recetas"
+                        >
+                          Eliminar Recetas
+                        </button>
+                        <% } %>
                       </div>
-                    </a>
                 </div>
+
               <% }); %>
 
               <!-- Contenedor para los resultados de búsqueda -->
@@ -226,20 +251,13 @@
           </div>
           <div class="modal-body">
             <img src="" id="modalRecetaImagen" class="img-fluid" alt="Receta" />
-            <p id="modalRecetaDescripcion"></p>
+            <p id="modalRecetaTipoReceta"></p>
+            <p id="modalRecetaDificultadReceta"></p>
+            <p id="modalRecetaTiempoCoccion"></p>
             <p id="modalRecetaIngredientes"></p>
             <p id="modalRecetaInstrucciones"></p>
           </div>
           <div class="modal-footer">
-            <button 
-              type="button" 
-              class="btn btn-outline-danger" 
-              id="eliminarRecetaButton"
-              data-bs-dismiss="modal"
-            >
-              Eliminar Receta
-            </button>
-
             <button
               type="button"
               class="btn btn-outline-success"
@@ -260,6 +278,7 @@
     <script src="js/busquedaRecetas.js"></script>
     <script src="js/eliminarRecetas.js"></script>
     <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
   </body>
 </html>

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tarjetasReceta.forEach((tarjeta) => {
       const titulo = tarjeta.getAttribute("data-bs-titulo").toLowerCase();
-      const descripcion = tarjeta.getAttribute("data-bs-descripcion").toLowerCase();
+      const descripcion = tarjeta.getAttribute("data-bs-descripcion").toLowerCase(); //tipo_receta
       const tarjetaPadre = tarjeta.closest(".col");
 
       if (titulo.includes(query) || descripcion.includes(query)) {

@@ -7,6 +7,14 @@ const connection = require("../database/db.js");
 //nos devuelva, retornara, puede ser favorable, o que no funcione correctamente, reject
 const { promisify } = require("util");
 
+exports.homePage = (req, res) => {
+  if (!req.user) {
+    res.render("homePage", {
+      login: false,
+      name: "Debe iniciar sesión",
+    });
+  }
+};
 
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
@@ -15,16 +23,17 @@ exports.register = async (req, res) => {
     const user = req.body.user;
     //esta es la password que ingresado de texto plano, abajo en passwordHaash lo capturamos y la encriptamos
     const pass = req.body.pass;
-    const rolId = req.body.rol; 
+
     //aca tenemos que guardar la contraseña encriptada
     const passHash = await bcryptjs.hash(pass, 8); //8 de iteracion
     //aqui hacemos la consulta a la base de datos para capturar la data ingresada
     connection.query(
       "INSERT INTO users SET ?",
-      { user: user, name: name, pass: passHash, rol_id: rolId },
+      { user: user, name: name, pass: passHash },
       (error, results) => {
         if (error) {
           console.log(error);
+          alert("El usuario ya existe");
         } else {
           // valores que recibe la plantilla register mediante un objecto
           res.render("register", {
@@ -88,9 +97,14 @@ exports.login = async (req, res) => {
             // }
             //Inicio de sesion OK, generar el jwt -> documentacion: npmjs.com/package/jsonwebtoken
             const id = results[0].id;
-            const token = jwt.sign({ id: id }, process.env.JWT_SECRETO, {
-              expiresIn: process.env.JWT_TIEMPO_EXPIRA,
-            });
+            const rol = results[0].rol;
+            const token = jwt.sign(
+              { id: id, rol: rol },
+              process.env.JWT_SECRETO,
+              {
+                expiresIn: process.env.JWT_TIEMPO_EXPIRA,
+              }
+            );
             //generamos token SIN fecha de expiracion
             //const token = jwt.sign({id:id}, process.env.JWT_SECRETO)
             console.log("TOKEN: " + token + " para el USUARIO: " + user);
@@ -153,25 +167,46 @@ exports.isAuthenticated = async (req, res, next) => {
   }
 };
 
-exports.homePage = (req, res) => {
-  if (!req.user) {
-    res.render("homePage", {
-      login: false,
-      name: "Debe iniciar sesión",
-    });
+// Es para saber si el rol es admin o usuario
+exports.checkRole = (roles) => async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      const decodificada = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRETO
+      );
+      // Ahora, puedes acceder al rol del usuario desde el token decodificado
+      const rolUsuario = decodificada.rol;
+
+      // Verifica si el usuario tiene el rol necesario
+      if (!roles.includes(rolUsuario)) {
+        return res
+          .status(403)
+          .send("No tienes permiso para acceder a esta página.");
+      } else {
+        // Si el usuario tiene el rol necesario, permite el acceso
+        next();
+      }
+    } catch (error) {
+      console.log(error);
+      return next();
+    }
+  } else {
+    // Si no se encuentra el token en las cookies, redirige al login
+    res.redirect("/login");
   }
 };
 
- exports.addReceta = (req, res) => {
+exports.addReceta = (req, res) => {
   console.log(req.body);
   try {
-    const { nombre, descripcion, ingredientes, instrucciones } = req.body;
+    const { nombre, tipo_receta, ingredientes, instrucciones, tiempo_coccion, dificultad_receta } = req.body;
     const imagen = req.file.filename; // Nombre de la imagen subida
-  
+
     // Inserta la receta en la base de datos
     connection.query(
-      "INSERT INTO recetas (nombre, descripcion, ingredientes, instrucciones, imagen) VALUES (?, ?, ?, ?, ?)",
-      [nombre, descripcion, ingredientes, instrucciones, imagen],
+      "INSERT INTO recetas (nombre, tipo_receta, dificultad_receta, tiempo_coccion, ingredientes, instrucciones, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [nombre, tipo_receta, dificultad_receta, tiempo_coccion, ingredientes, instrucciones, imagen],
       (err, result) => {
         if (err) {
           console.error("Error al guardar la receta: " + err.message);
@@ -188,39 +223,42 @@ exports.homePage = (req, res) => {
             timer: 1500,
             ruta: "",
           });
-         
         }
       }
     );
-  
-
   } catch (error) {
     console.log(error);
   }
+};
 
+exports.eliminarReceta = (req, res) => {
+  const recetaId = req.params.id; // el ID de la receta se pasa como parámetro en la URL
+
+  // Verifica si la receta se encuentra en la tabla recetas (ingresadas desde el formulario) o recetas_base_datos (base de datos)
+  const tabla = req.query.tabla; // se pasa el nombre de la tabla como un parámetro en la URL
+
+  // Define la consulta SQL para eliminar la receta según la tabla especificada
+  let sql;
+  if (tabla === "recetas") {
+    sql = "DELETE FROM recetas WHERE idRecetas = ?";
+  } else if (tabla === "recetas_base_datos") {
+    sql = "DELETE FROM recetas_base_datos WHERE idDB = ?";
+  }
+
+  // Ejecuta la consulta SQL correspondiente
+  connection.query(sql, [recetaId], (err, result) => {
+    if (err) {
+      console.error("Error al eliminar la receta: " + err.message);
+      res.status(500).send("Error al eliminar la receta.");
+    } else {
+      console.log("Receta eliminada con éxito");
+      // Redirige a la página principal o a donde desees después de eliminar la receta
+      res.redirect("/");
+    }
+  });
 };
 
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
-  return res.redirect("/homePage");
+  return res.redirect("/login");
 };
-
-exports.deleteRecipe = (req, res) => {
-  const recetaId = req.params.id;
-  const userId = req.user.id; // Supongamos que guardas el ID del usuario en la sesión
-
-  // Verificar si la receta pertenece al usuario actual o es administrador
-  const sql = `DELETE FROM recetas WHERE id = ? AND (user_id = ? OR 'administrador' = ?)`;
-  connection.query(sql, [recetaId, userId, req.user.rol], (err, result) => {
-    if (err) {
-      console.error("Error al eliminar la receta: " + err.message);
-      return res.status(500).send("Error al eliminar la receta");
-    }
-    if (result.affectedRows === 0) {
-      // No se eliminó ninguna receta, tal vez no tenía permiso
-      return res.status(403).send("No tienes permiso para eliminar esta receta.");
-    }
-    // La receta se eliminó correctamente
-    res.redirect("/"); // O redirige a otra página
-  });
-}

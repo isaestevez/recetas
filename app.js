@@ -12,9 +12,8 @@ app.set("view engine", "ejs");
 
 //seteamos la carpeta public
 app.use(express.static('public'));
-// app.use(express.static(path.join(__dirname, 'public')));
 
-//para agregar imagenes para las recetas
+//agregar imagenes para las recetas
 //middlewares
 const storage = multer.diskStorage({
     destination: path.join(__dirname, './public/img/img-form'),
@@ -49,8 +48,6 @@ app.use(function(req, res, next) {
     next(); 
 });
     
-
-
 
 app.listen(3000, () => {
     console.log('Server Running on Port 3000')

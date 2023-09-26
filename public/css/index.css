@@ -23,6 +23,12 @@
     color: rgb(0 0 0 / var(--tw-text-opacity));
     margin-bottom: 20px;
   }
+  /* CARRUSEL */
+  .container {
+    max-width: 100%; /* Ajusta el ancho máximo del contenedor */
+    height: auto; /* Permite que la altura se ajuste automáticamente*/
+}
+
   /* CSS para las dinamicas */
   .card-link {
   height: 100%; /* Establece una altura fija para las tarjetas dinámicas */

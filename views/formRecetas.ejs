@@ -6,8 +6,6 @@
     <title>Agregar Receta</title>
     <!-- Bootstrap CSS -->
     <link href="css/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_css_bootstrap.min.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body class="text-center">
     <div class="container mt-5">
@@ -25,10 +23,22 @@
                                 <input type="text" class="form-control" id="nombre" name="nombre" required>
                             </div>
 
-                            <!-- Descripción -->
+                            <!-- Tipo de Receta -->
                             <div class="mb-3">
-                                <label for="descripcion" class="form-label">Descripción:</label>
-                                <textarea class="form-control" id="descripcion" name="descripcion" rows="4"></textarea>
+                                <label for="tipo_receta" class="form-label">Tipo de Receta:</label>
+                                <textarea class="form-control" id="tipo_receta" name="tipo_receta" rows="2"></textarea>
+                            </div>
+
+                            <!-- Dificultad de la Receta -->
+                            <div class="mb-3">
+                                <label for="dificulta_receta" class="form-label">Dificultad de la Receta:</label>
+                                <input type="text" class="form-control" id="dificulta_receta" name="dificulta_receta" required>
+                            </div>
+
+                            <!-- Tiempo de Coccion -->
+                            <div class="mb-3">
+                                <label for="tiempo_coccion" class="form-label">Tiempo de Coccion:</label>
+                                <textarea class="form-control" id="tiempo_coccion" name="tiempo_coccion" rows="4"></textarea>
                             </div>
 
                             <!-- Ingredientes -->
@@ -51,7 +61,7 @@
 
                             <!-- Botones -->
                             <div class="mb-3 text-center">
-                                <a href="/"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+                                <a href="/" class="btn btn-secondary">Cancelar</a>
                                 <button type="submit" class="btn btn-success">Agregar Receta</button>
                             </div>
                         </form>
@@ -60,6 +70,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap JS y jQuery (asegúrate de incluirlos al final del documento) -->
@@ -82,3 +93,80 @@
     <% } %>
 </body>
 </html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Agregar Receta</title>
+    <!-- Bootstrap CSS -
+    <link href="css/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_css_bootstrap.min.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h1 class="mb-0">Agregar Receta</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="/guardar-receta" method="POST" enctype="multipart/form-data">
+                            <!-- Nombre de la Receta 
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre de la Receta:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+
+                            <!-- Tipo de Receta 
+                            <div class="mb-3">
+                                <label for="tipo_receta" class="form-label">Tipo de Receta:</label>
+                                <textarea class="form-control" id="tipo_receta" name="tipo_receta" rows="4"></textarea>
+                            </div>
+
+                            <!-- Dificultad de la Receta 
+                            <div class="mb-3">
+                                <label for="dificulta_receta" class="form-label">Dificultad de la Receta:</label>
+                                <input type="text" class="form-control" id="dificulta_receta" name="dificulta_receta" required>
+                            </div>
+
+                            <!-- Tiempo de Coccion 
+                            <div class="mb-3">
+                                <label for="tiempo_coccion" class="form-label">Tiempo de Coccion:</label>
+                                <textarea class="form-control" id="tiempo_coccion" name="tiempo_coccion" rows="4"></textarea>
+                            </div>
+
+                            <!-- Ingredientes 
+                            <div class="mb-3">
+                                <label for="ingredientes" class="form-label">Ingredientes:</label>
+                                <textarea class="form-control" id="ingredientes" name="ingredientes" rows="4"></textarea>
+                            </div>
+
+                            <!-- Instrucciones 
+                            <div class="mb-3">
+                                <label for="instrucciones" class="form-label">Instrucciones:</label>
+                                <textarea class="form-control" id="instrucciones" name="instrucciones" rows="4"></textarea>
+                            </div>
+
+                            <!-- Imagen 
+                            <div class="mb-3">
+                                <label for="imagen" class="form-label">Imagen:</label>
+                                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+                            </div>
+
+                            <!-- Botones 
+                            <div class="mb-3 text-center">
+                                <a href="/"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+                                <button type="submit" class="btn btn-success">Agregar Receta</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
