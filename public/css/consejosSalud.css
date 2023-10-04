@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+    margin: auto;
+    padding: 60px 0;
+}
+
+.container h2 {
+    color: darkorange;
+}
+
+.introduccion {
+    margin-top: 50px;
+}
+
+.section-divider {
+    margin-top: 20px;
+    color: rgb(202, 132, 47);
+}
+
+.title-text {
+    text-align: center;
+    display: block; /* Asegura que el título esté en su propia línea */
+    margin: 0 auto; /* Centra horizontalmente */
+    width: max-content; /* Limita el ancho al contenido */
+    color: darkorange;
+}
+/* Clase para centrar el párrafo */
+.text-center {
+    text-align: center;
+    color: darkgrey;
+  }
+
+/*EMBARAZO*/
+.subtitulo {
+    text-align: center;
+    font-weight: 300;
+    color: #972228;
+    margin-bottom: 40px;
+    font-size: 40px;
+}  
+
+.text-parrafo {
+    color: darkgrey;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.title {
+    text-align: left;
+    margin-top: 40px;
+    color: darkorange;
+}
+
+/*TABLA EMBARAZO*/
+/* Cambia el color de las letras de los encabezados */
+.custom-table th {
+    color: orange;
+  }
+  
+  /* Cambia el color de las letras de las celdas de la izquierda */
+  .custom-table th.table-active {
+    color: orange;
+  }
+  
+  /* Cambia el color de las letras de las celdas de la izquierda */
+  .custom-table th.scope-row {
+    color: orange;
+  }
+  
+/* Clase para el contenedor de la imagen y el contenido */
+.image-and-content-container {
+    display: flex;
+    flex-direction: row; /* Alinea la imagen y el contenido en una fila */
+    align-items: center; /* Alinea verticalmente en el centro */
+    margin-top: 20px;
+}
+
+/* Estilo para la imagen */
+.image-and-content-container img {
+    max-width: 50%; /* Ajusta el tamaño de la imagen al 50% del contenedor */
+    margin-right: 20px; /* Espacio entre la imagen y el contenido */
+}
+
+/* Estilo para la imagen en pantallas grandes (mayor a 768px de ancho) */
+@media (min-width: 768px) {
+    .image-and-content-container img {
+        max-width: 20%; /* Ajusta el tamaño de la imagen al 30% del contenedor */
+        margin-right: 20px; /* Espacio entre la imagen y el contenido */
+    }
+}
+
+/*LISTA*/
+ /* Estilo para los elementos de la lista */
+  ul {
+    color: #972228; /* Cambia el color del texto de la lista a rojo */
+  }
+
+  /* Estilo para los elementos de la lista (los ítems de la lista) */
+  ul li {
+    color: #972228; /* Cambia el color del texto de los ítems de la lista a rojo */
+  }
+
+  /* Estilo para los puntos de la lista */
+  ul li::before {
+    /*content: "•";  Cambia el contenido del punto a un círculo sólido (•) */
+    color: #972228; /* Cambia el color del punto a rojo */
+    display: inline-block;
+    width: 1em; /* Ajusta el ancho del punto según tus preferencias */
+    margin-right: 0.5em; /* Ajusta el espacio entre el punto y el texto del ítem de la lista */
+  }
+
+
+  

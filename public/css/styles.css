@@ -2,12 +2,18 @@
 .btn-bd-primary:hover, .btn-bd-primary:active{font-weight: 600;color: #fff;background-color: #972228;border-radius: #972228;}
 .btn-bd-primary:focus{box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);}
 
+html,
 body {
+    height: 100%;
+}
+
+body {
+    display: flex;
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(255, 255, 255, 0.95);
-  }
+}
 
 .img-logo {
     width: 20%;

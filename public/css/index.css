@@ -23,13 +23,14 @@
     color: rgb(0 0 0 / var(--tw-text-opacity));
     margin-bottom: 20px;
   }
-  /* CARRUSEL */
-  .container {
-    max-width: 100%; /* Ajusta el ancho máximo del contenedor */
-    height: auto; /* Permite que la altura se ajuste automáticamente*/
-}
 
   /* CSS para las dinamicas */
+  .card-img-top {
+    width: 100%; /* Establece el ancho de la imagen al 100% del contenedor */
+    height: 200px; /* Establece la altura fija deseada para las imágenes */
+    object-fit: cover; /* Ajusta la imagen para que llene el contenedor sin deformarse */
+  }
+
   .card-link {
   height: 100%; /* Establece una altura fija para las tarjetas dinámicas */
   }
@@ -44,6 +45,7 @@
     color: white;
     padding: 20px 0;
     text-align: center;
+    margin-bottom: 0px;
   }
   /* Estilos para los íconos sociales */
   .social a {

@@ -17,85 +17,34 @@
     />
     <link href="css/carousel.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet" />
+    <link href="css/active-links.css" rel="stylesheet" />
     
   </head>
   <body>
+    <% const currentPage = locals.currentPage || ''; %>
     <header>
-      <!-- NAVBAR -> BARRA DE BUSQUEDA -->
-      <nav
-        class="navbar navbar-expand-md navbar-dark fixed-top"
-        style="background-color: #972228"
-      >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <i class="bi bi-egg-fried">Conin - Comida Saludable</i>
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  >Recetas</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Trucos de cocina</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Consejos de salud</a>
-              </li>
-              <% if(user && user.rol === 'admin') { %>
-              <li class="nav-item">
-                <a class="nav-link" href="/agregar-recetas">Ingresar recetas</a>
-              </li>
-              <% } %>
-            </ul>
-            <!-- Para la busqueda de recetas -->
-            <!-- 1-Agrega el atributo name para enviar el término de búsqueda 
-                 2-agrego un id para manejar en js la busqueda -->
-            <form class="d-flex"> 
-                <input
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  name="query"
-                  id="inputSearch" 
-                />
-                <a class="btn btn-outline-success" href="/logout">CerrarSesion</a>
-            </form>
-          </div>
-        </div>
-      </nav>
+      
+      <%- include('header.ejs') %>
+      
     </header>
     <!-- CARRUSEL, 3 FOTOS -->
     <main>
-      <div id="carouselExample" class="carousel slide container" data-bs-ride="carousel">
+      <div id="carouselExample" class="carousel slide container-carrusel" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="img/logo1.jpeg" class="figure-img img-fluid img-thumbnail" alt="image1" />
+            <img src="img/logo1.jpeg" class="d-block w-100" alt="image1" />
           </div>
           <div class="carousel-item">
             <img
               src="img/niñosArcoirisConin.jpeg"
-              class="figure-img img-fluid img-thumbnail"
+              class="d-block w-100"
               alt="image2"
             />
           </div>
           <div class="carousel-item">
             <img
               src="img/imagenCarrusel.webp"
-              class="figure-img img-fluid img-thumbnail"
+              class="d-block w-100"
               alt="image3"
             />
           </div>
@@ -217,17 +166,7 @@
 
       <hr class="featurette-divider" />
       <!-- FOOTER -->
-      <footer class="containerFooter">
-        <div class="social">
-          <a href="https://www.facebook.com/familiaconin.cdg"
-            ><i class="bi bi-facebook"></i
-          ></a>
-          <a href="ninezconesperanza@gmail.com"
-            ><i class="bi bi-envelope-at"></i
-          ></a>
-        </div>
-        <p>&copy; 2023 - Fundación Conin &middot;</p>
-      </footer>
+      <%- include('footer.ejs') %>
     </main>
 
     <!-- Modal reutilizable -->
@@ -278,279 +217,8 @@
     <script src="js/busquedaRecetas.js"></script>
     <script src="js/eliminarRecetas.js"></script>
     <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+    <script src="js/resaltarLinks.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
   </body>
 </html>
-
-
-
-
-<!-- <div class="col">
-            <a
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/image1.webp"
-              data-bs-descripcion="Como preparar las galletas perfecta."
-              data-bs-ingredientes="Para 25 unidades:<br>
-              Puré o compota de manzana sin azúcar - 240 g<br>
-              Copos de avena finos ...................80 g<br>
-              Almendras crudas laminadas .............40 g<br>
-              Almendras molidas 1 cucharadita<br>
-              Sal 1 oizca"
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/image1.webp"
-                  class="card-img-top"
-                  alt="img1"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Galletas de avena y manzana</h5>
-                  <p class="card-text">
-                    Como preparar las galletas perfecta.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/torrijas_keto_sanas_3d0c9803d1.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/torrijas_keto_sanas_3d0c9803d1.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a short card.</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a 
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/guisos_alubias_blancas_espinacas_fea0b36b23.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/guisos_alubias_blancas_espinacas_fea0b36b23.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a 
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/pollo_asado_platanos_verdes_82653d9b00.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/pollo_asado_platanos_verdes_82653d9b00.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a 
-            href="#"
-            class="card-link"
-            data-bs-titulo="Título de la Receta"
-            data-bs-imagen="img/ensalada_fria_almidon_resistente_saludable_db23319ea0.webp"
-            data-bs-descripcion="Descripción de la receta."
-            data-bs-ingredientes="Ingredientes de la receta."
-            data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/ensalada_fria_almidon_resistente_saludable_db23319ea0.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/huevo_3_formas_de_hacerlo_80a98b58b1.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/huevo_3_formas_de_hacerlo_80a98b58b1.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a 
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/PIZZA_DE_PISTO_verduras_22cb2d0904.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/PIZZA_DE_PISTO_verduras_22cb2d0904.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a 
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/espirales_sin_gluten_saludables_cocina_sana_ee6aab0d2f.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/espirales_sin_gluten_saludables_cocina_sana_ee6aab0d2f.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a 
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/polos_de_gazpacho_nutritivo_6f1415d105.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/polos_de_gazpacho_nutritivo_6f1415d105.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col">
-            <a 
-              href="#"
-              class="card-link"
-              data-bs-titulo="Título de la Receta"
-              data-bs-imagen="img/torrijas_keto_sanas_3d0c9803d1.webp"
-              data-bs-descripcion="Descripción de la receta."
-              data-bs-ingredientes="Ingredientes de la receta."
-              data-bs-instrucciones="Instrucciones de preparación de la receta."
-            >
-              <div class="card h-100">
-                <img
-                  src="img/torrijas_keto_sanas_3d0c9803d1.webp"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div> -->

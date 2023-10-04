@@ -1,0 +1,92 @@
+<!-- NAVBAR -> BARRA DE BUSQUEDA -->
+<nav
+  class="navbar navbar-expand-md navbar-dark fixed-top"
+  style="background-color: #972228"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <i class="bi bi-egg-fried">Conin - Comida Saludable</i>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active-link <% if (currentPage === '/') { %>active<% } %>"
+            aria-current="page"
+            href="/"
+            >Recetas
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle active-link <% if (currentPage === '/alimentacion') { %>active<% } %>"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            href="/alimentacion"
+          >
+            Alimentación
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/alimentacion">Lactancia Materna</a></li>
+            <li><a class="dropdown-item" href="#alimentacion1">Alimentación Complementaria</a></li>
+            <li><a class="dropdown-item" href="#alimentacion2">Alimentación del Preescolar Escolar</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle active-link <% if (currentPage === '/consejos-salud') { %>active<% } %>"
+            id="consejosSalud"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            href="/consejos-salud"
+          >
+            Consejos de salud
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="consejosSalud">
+            <li><a class="dropdown-item" href="/consejos-salud">Introducción</a></li>
+            <li><a class="dropdown-item" href="#embarazada">Embarazo</a></li>
+            <li><a class="dropdown-item" href="#salud">El niño - Controles de Salud</a></li>
+            <li><a class="dropdown-item" href="#desarrollo">Desarrollo Infantil</a></li>
+            <li><a class="dropdown-item" href="#crianza">Más consejos para la Crianza y Cuidado del Niño</a></li>
+            <li><a class="dropdown-item" href="#accidentes">Accidentes</a></li>
+          </ul>
+        </li>
+        <% if(user && user.rol === 'admin') { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/agregar-recetas">Ingresar recetas</a>
+        </li>
+        <% } %>
+      </ul>
+      <!-- Para la busqueda de recetas -->
+      <!-- 1-Agrega el atributo name para enviar el término de búsqueda 
+         2-agrego un id para manejar en js la busqueda -->
+      <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          name="query"
+          id="inputSearch"
+        />
+        <a class="btn btn-outline-success" href="/logout">CerrarSesion</a>
+      </form>
+    </div>
+  </div>
+</nav>
+
+

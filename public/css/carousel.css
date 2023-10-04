@@ -11,6 +11,11 @@ body {
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
+  /* CARRUSEL */
+  .container-carrusel {
+    max-width: 100%; /* Ajusta el ancho máximo del contenedor */
+    height: auto; /*Permite que la altura se ajuste automáticamente */
+}
 
 /* Carousel base class */
 .carousel {

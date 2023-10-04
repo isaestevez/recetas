@@ -209,7 +209,7 @@ exports.addReceta = (req, res) => {
       [nombre, tipo_receta, dificultad_receta, tiempo_coccion, ingredientes, instrucciones, imagen],
       (err, result) => {
         if (err) {
-          console.error("Error al guardar la receta: " + err.message);
+          console.log("Error al guardar la receta: " + err.message);
           res.status(500).send("Error al guardar la receta.");
         } else {
           console.log("Receta guardada con éxito");
@@ -248,7 +248,7 @@ exports.eliminarReceta = (req, res) => {
   // Ejecuta la consulta SQL correspondiente
   connection.query(sql, [recetaId], (err, result) => {
     if (err) {
-      console.error("Error al eliminar la receta: " + err.message);
+      console.log("Error al eliminar la receta: " + err.message);
       res.status(500).send("Error al eliminar la receta.");
     } else {
       console.log("Receta eliminada con éxito");
