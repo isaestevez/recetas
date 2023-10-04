@@ -34,7 +34,7 @@ router.get("/", authController.isAuthenticated, (req, res) => {
         } else {
           recetasDB = resultDB;
           // Renderiza la página principal (index.ejs) y pasa las recetas
-          res.render("index", { user: req.user, recetasDB, recetasFormulario, currentPage: req.path });
+          res.render("index", { user: req.user, recetasDB, recetasFormulario});
         }
       }); 
     }
@@ -56,11 +56,11 @@ router.get("/agregar-recetas", authController.checkRole(["admin"]), (req, res) =
 });
 
 router.get("/consejos-salud", authController.isAuthenticated, (req, res) => {
-  res.render("consejosSalud", { user: req.user, currentPage: "consejos-salud" });
+  res.render("consejosSalud", { user: req.user});
 });
 
 router.get("/alimentacion", authController.isAuthenticated, (req, res) => {
-  res.render("alimentacion", { user: req.user, currentPage: "alimentacion" });
+  res.render("alimentacion", { user: req.user});
 });
 
 // Ruta para procesar el formulario y agregar la receta a la base de datos
