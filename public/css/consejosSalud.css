@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    scroll-behavior: smooth; /*controlar el comportamiento del scroll*/
+}
+
 body {
     font-family: "Open Sans", sans-serif;
 }
@@ -40,7 +44,9 @@ body {
 .text-center {
     text-align: center;
     color: darkgrey;
+    font-size: 18px;
   }
+
 
 /*EMBARAZO*/
 .subtitulo {
@@ -55,6 +61,10 @@ body {
     color: darkgrey;
     margin-top: 40px;
     margin-bottom: 40px;
+    font-size: 18px;
+}
+span {
+  color: #972228;
 }
 
 .title {
@@ -121,5 +131,24 @@ body {
     margin-right: 0.5em; /* Ajusta el espacio entre el punto y el texto del ítem de la lista */
   }
 
+  ol {
+    color: #972228; /* Cambia el color del texto de la lista a rojo */
+}
+
+ol span {
+  color:rgb(202, 132, 47)
+}
+
+  /*EL NIÑO - CONTROLES DE SALUD*/
+   .smaller-width {
+    max-width: 70px; /* el cuadro */
+  } 
+
+  /*DESARROLLO INFANTIL*/
+  .imgDesarrollo {
+    text-align: center;
+    width: 100%;
+    
+  }
 
   

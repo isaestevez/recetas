@@ -21,7 +21,7 @@
         document.getElementById("modalRecetaTitulo").textContent = titulo;
         document.getElementById("modalRecetaImagen").src = imagen;
         document.getElementById("modalRecetaTipoReceta").textContent = descripcion; //esta es tipo_receta
-        document.getElementById("modalRecetaDificultadReceta").textContent = dificultad;
+        document.getElementById("modalRecetaDificultadReceta").textContent = "Dificultad: " + dificultad;
         document.getElementById("modalRecetaTiempoCoccion").textContent = "Tiempo de cocción: " + tiempo;
      
         //para ubicarlos prolijo y uno abajo de otro con un punto en cada items

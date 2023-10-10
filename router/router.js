@@ -10,7 +10,7 @@ router.get("/", authController.isAuthenticated, (req, res) => {
   // Consulta SQL para obtener todas las recetas de la base de datos mediante el formulario
   const sql = "SELECT * FROM recetas";
 
-  // Consulta SQL para obtener todas las recetas ingresadas mediante el formulario
+  // Consulta SQL para obtener todas las recetas ingresadas en la DB
   const sqlDB = "SELECT * FROM recetas_base_datos";
 
   // Arreglos para almacenar recetas

@@ -39,6 +39,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombreado suave */
   }
   
+  /* Estilos para las imágenes dentro del modal */
+  #recetaModal img {
+    width: 100%; /* Establece el ancho de la imagen al 100% del modal */
+    height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción original */
+    object-fit: cover; /* Ajusta la imagen para que llene el modal sin deformarse */
+    max-height: 400px; /* Establece una altura máxima para evitar que las imágenes sean demasiado grandes */
+  }
+
   /* Estilos para el footer */
   .containerFooter {
     background-color: #972228;

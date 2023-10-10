@@ -15,7 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     />
     <link rel="stylesheet" href="css/active-links.css" />
-    <link rel="stylesheet" href="css/consejosSalud.css" /
+    <link rel="stylesheet" href="css/consejosSalud.css" />
   </head>
   <body>
     <header><%- include('header.ejs') %></header>
@@ -194,7 +194,227 @@
         <p class="text-parrafo">
           De esta manera se evitan posibles malformaciones y anemía en tu bebé.
         </p>
+
+        <h5 class="title">MODELO DE PORCIONES DE ALIMENTOS PARA CUBRIR NECESIDADES:</h5>
+        <div class="table-responsive" >
+          <table
+            class="table table-hover table-bordered table-sm custom-table align-middle"
+          >
+            
+            <tbody>
+              <tr style="text-align: center;">
+                <th class="table-active" scope="row" >
+                  <h6 class="title" style="text-align: center;">DESAYUNO Y MEDIA TARDE</h6>
+                  <p>
+                    Un vaso de leche fluida o leche <br>
+                    en polvo 3 cdas soperas + azúcar <br>
+                    Pan fresco o tostado con queso y dulce
+                  </p>
+                </th>
+                <td style="text-align: center;"><img src="img/imgLibro/porciones1-sinFondo.png" style="max-width: 200px;"></td>
+              </tr>
+              <tr style="text-align: center;">
+                <th class="table-active" scope="row">
+                  <h6 class="title" style="text-align: center;">ALMUERZO Y CENA</h6>
+                  <p>
+                    Carne, pollo o pescado + porción de <br>
+                    vegetales crudos y vegetales cocidos <br>
+                    <span class="title">Postre:</span> fruta (cítricos) <br>
+                    <span class="title">Bebida:</span> agua, jugo de frutas naturales
+                  </p>
+                </th>
+                <td style="text-align: center;"><img src="img/imgLibro/porciones2-sinFondo.png" style="max-width: 200px;"></td>
+              </tr>
+              <tr style="text-align: center;">
+                <th class="table-active" scope="row">
+                  <h6 class="title" style="text-align: center;">COLACIÓN</h6>
+                  <p>
+                    1 vaso de yogur <br>
+                    1 porción de postre con leche <br>
+                    (preparado con maíz, sémola, <br>
+                    arroz, avena) <br>
+                    1 trozo de queso mantecoso <br> 
+                    con dulce de batata
+                  </p>
+                </th>
+                <td style="text-align: center;"><img src="img/imgLibro/porciones3-sinFondo.png" style="max-width: 200px;"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="container" id="niñoControlesSalud">
+        <h2 class="subtitulo">El niño - Controles de salud</h2>
+        <p class="text-parrafo">
+          Se debe supervisar el crecimiento y desarrollo de los niños. La frecuencia recomendada de los controles de salud
+          del niño sano con el pediatra, es la siguiente: 
+        </p>
+        <div class="table-responsive">
+          <table
+            class="table table-hover table-bordered table-sm custom-table"
+          >
+            <tbody>
+              <tr>
+                <th class="table-active smaller-width" scope="row">
+                  A los 7 y 15 días de vida <br>
+                  Hasta los 12 meses de vida: 
+                </th>
+                <td>1 vez por mes</td>
+              </tr>
+              <tr> 
+                <th class="table-active smaller-width" scope="row">
+                  Entre los 12 y 18 meses de vida:
+                </th>
+                <td>Cada 3 meses</td>
+              </tr>
+              <tr>  
+                <th class="table-active smaller-width" scope="row">
+                  Hasta los 3 años de edad: 
+                </th>
+                <td>Cada 6 meses</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5 class="title">SE DEBEN REALIZAR, ADEMÁS:</h5>
+        <ul>
+          <li>Estudios auditivos, en los primeros días de vida.</li>
+          <li>Examen de su vista a los 6 meses de vida.</li>
+          <li>Consulta odontológica a partir de la salida de su primer diente. Luego, se deben realizar los controles cada 6 meses.</li>
+          <li>Alrededor del tercer mes de vida, realizar radiografía o ecografía de cadera.</li>
+        </ul>
+        <h5 class="title">AUMENTO DE PESO DURANTE EL PRIMER AÑO DE VIDA:</h5>
+        <div class="table-responsive">
+          <table
+            class="table table-hover table-bordered table-sm custom-table"
+          >
+            <tbody>
+              <tr>
+                <th class="table-active smaller-width" scope="row">0-6 semanas</th>
+                <td>20 gramos/día</td>
+              </tr>
+              <tr> 
+                <th class="table-active smaller-width" scope="row">< 4 meses</th>
+                <td>113-227 gramos/semana</td>
+              </tr>
+              <tr>  
+                <th class="table-active smaller-width" scope="row">4-6 meses</th>
+                <td>85-142 gramos/semana</td>
+              </tr>
+              <tr>  
+                <th class="table-active smaller-width" scope="row">6-12 meses</th>
+                <td>42-85 gramos/semana</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--TABLA DE VACUNACION-->
+        <div class="text-center mt-4">
+          <h5 class="title mb-3">LAS VACUNAS QUE DEBEN RECIBIR LOS NIÑOS A MEDIDA QUE CRECEN SON:</h5>
+          <img src="img/imgLibro/imgCalendario-sinFondo.png" class="img-fluid" style="max-width: 400px;" />
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#calendarioModal">
+            <img src="img/imgLibro/calendario-vacunacion1.jpg" alt="calendario" class="img-fluid" />
+          </a>
+        </div>
         
+       <!-- Modal -->
+      <div class="modal fade" id="calendarioModal" tabindex="-1" aria-labelledby="calendarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="calendarioModalLabel">Calendario de Vacunación</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body text-center">
+              <img src="img/imgLibro/calendario-vacunacion1.jpg" alt="calendario" class="img-fluid" style="max-width: 100%; width: 100%;" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--FIN DEL MODAL-->
+
+      </section>
+      <section class="container" id="desarrollo">
+        <h2 class="subtitulo">DESARROLLO INFANTIL</h2>
+        <p class="text-parrafo">
+          El adulto que cuida y atiende a un niño pequeño debe ser sensible y accesible para poder 
+          ser la <span>figura de apego</span>, es decir, alguien que pueda comprender y satisfacer 
+          las necesidades que lo angustian y desequilibran, para que el niño pueda identificarlo y 
+          buscarlo. A partir de la seguridad afectiva que tiene, el niño ppodrá conocer el mundo, 
+          explorarlo, transformarlo y aprende. 
+        </p>
+        <h5 class="title">LENGUAJE</h5>
+        <h6 class="title">LOS PADRES, EN ETAPAS TEMPRANAS DEL DESARROLLO DEL NIÑO, SON LOS PRINCIPALES AGENTES ESTIMULADORES.</h6>
+        <p class="text-parrafo">
+          El lenguaje oral es le principal medio de comunicación y su desarrollo está influenciado por el entorno
+          donde el niño se desenvuelve. Los niños aprenderán a hablar, escuchando cuando otros le hablan. 
+          Si observan diferencias o retrasos en la aparición del lenguaje, mientras antes consulten a un especialista
+          <span>los resultados de una intervención temprana y efectiva son más beneficiosos para el niño y su familia.</span>
+        </p>
+        <div class="imgDesarrollo mb-3">
+          <img src="img/imgLibro/lenguaje-removebg-preview.png" alt="Lenguaje Infantil" class="img-fluid rounded-circle"/>
+        </div>
+        <h5 class="title">LOS CUIDADOS COTIDIANOS: MOMENTO DE INTERCAMBIO</h5>
+        <h6 class="title">MIRAR AL BEBÉ, TENER CONFIANZA EN ÉL Y OFRECERLE LO QUE NECESITA, LE GENERA CONFIANZA EN SÍ MISMO.</h6>
+        <ol>
+          <li>Cómo <span>levantar y sostener</span>al bebé: brindarle el mayor bienestar posible, elegir el mejor modo de sostenerlo, 
+            de manera cómoda y con contacto corporal y visual.
+          </li>
+          <li>Al <span>higienizarlo:</span> dejarse ver, hablarle tranquilamente, mirarlo. El bebé se comunica por sus movimientos, 
+            sus gestos, sus vocalizaciones. Si en estas primeras etapas fundamentales de la vida del bebé se le habla poco, se lo manipula
+            con habilidad pero rápido y sin entrar en relación con él, no puede advertir que él es importante. 
+          </li>
+          <li><span>Vestir y desvestir:</span> los cuidados no deben ser algo mecánico, sino un momento de intensa relación, el bebé
+            está realizando un aprendizaje profundo e íntimo. 
+          </li>
+          <li><span>Cuidados</span> desagradables: siempre prevenir al niño acerca de aquello que no le va a gustar. Esto será una 
+            fuente de seguridad y por lo tanto una posibilidad de mantenerse más tranquilo y relajado, apoyado por su familia.
+          </li>
+          <li>Mientras el bebé está despierto, permitir la <span>libertad de movimiento</span> y actividades.</li>
+          <li>No será necesario enseñarle a sentarse o caminar.</li>
+        </ol>
+        <h5 class="title">EL JUEGO Y SU IMPORTANCIA EN EL NIÑO</h5>
+        <h6 class="title">EL JUEGO ES UNA ACTIVIDAD PLACENTERA QUE CONTRIBUYE A LA CONSTRUCCIÓN PERSONAL DEL NIÑO.</h6>
+        <p class="text-parrafo">
+          El juego le permite al niño explorar, ejercita su mente, su cuerpo e incorpora nociones básicas acerca de su mundo.<br><br>
+          Desde los 2 o 3 meses se lo puede colocar en una superficie plana, con un colchón duro, acostado cómodamente boca arriba.
+        </p>
+        <div class="imgDesarrollo mb-3">
+          <img src="img/imgLibro/jugar.jpeg" alt="jugar" class="img-fluid rounded-circle" style="width: 600px; height: auto;" />
+        </div>
+        <p class="text-parrafo">
+          Recostados de espaldas todos los bebés son activos: ya que dispone libremente de toda su energía, su cuerpo está relajado,
+          su espalda derecha, la cabeza puede girar sin esfuerzo. Se verán impulsados por una fuerza interior, un deseo de experimentación 
+          de su cuerpo y de los que lo rodean. Los pies son tan activos como sus manos.
+        </p>
+        <h6 class="title">LAS ADQUISICIONES SE VAN SUCEDIENDO EN UN ORDEN COMÚN, PERO CADA NIÑO LAS LOGRA A SU PROPIO RITMO.</h6>
+        <h5 class="title">LA FAMILIA</h5>
+        <p class="text-parrafo">
+          "La familia es el entorno donde por excelencia se debe das e desarrollo integral de las personas, especialmente de los niños.
+          Pero la familia es mucho mas que cuidado y apoyo mutuo, es el espacio donde realizamos nuestras más profundas experiencias humanas. 
+          Los más profundos sentimientos, tienen su fuente en la familia, lo mejor y lo peor tienen lugar en ella (Organización Panamericana
+          de la Salud - OPS)." <br><br>
+          La crianza de un niño por una mamá y un papá que se amen, respeten y perduren en el tiempo optimiza los resultados de la crianza y crea en el niño elementos protectores ante las adversidades.
+        </p>
+      </section>
+      <section class="container" id="crianza">
+        <h2 class="subtitulo">MÁS CONSEJOS PARA LA CRIANZA Y CUIDADO DEL NIÑO</h2>
+        <p class="text-parrafo"> 
+          <span>BAÑO: </span> el primer baño se realiza al día siguiente a la caída del cordón umbilical.
+          Antes se puede higienizar al niño por partes, sin sumergirlo y sin humedecer el cordón umbilical.
+          La temperatura del ambiente debe ser agradable, 24-26 grados centígrados y el agua debe estar a 37 grados
+          centígrados. Si es posible tener ayuda para los primeros baños del niño. Usar jabón blanco o de glicerina neutro.
+          Los niños más grandes también deben estar con un adulto al momento del baño. Para los más chiquitos no superar
+          los 6 cm de agua en el recipiente.
+        </p>
+        <div class="imgDesarrollo mb-3">
+          <img src="img/imgLibro/bañarlos.jpeg" alt="jugar" class="img-fluid rounded-circle" style="width: 600px; height: auto;" />
+        </div>
+        <p class="text-parrafo"> 
+          <span>AMBIENTE: </span>es necesario tener cuidado con el tipo de calefacción que se usa, siempre debe haber alguna ventilación y no hayque dejar las estufas encendidas si no son seguras
+        </p>
       </section>
       <!-- FOOTER -->
       <%- include('footer.ejs') %>
