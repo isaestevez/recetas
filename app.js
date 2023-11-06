@@ -12,6 +12,10 @@ app.set("view engine", "ejs");
 
 //seteamos la carpeta public
 app.use(express.static('public'));
+app.use((req, res, next) => { //Esto te permite ver más detalles sobre la solicitud
+    console.log(`Received ${req.method} request to ${req.url}`);
+    next();
+  });
 
 //agregar imagenes para las recetas
 //middlewares
@@ -28,7 +32,7 @@ app.use(multer({
 }).single('imagen')) //aca viene del formulario del name: imagen
 
 //configurar nodejs, para procesar datos enviados desde forms
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //seteamos las variables de entorno

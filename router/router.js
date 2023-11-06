@@ -5,6 +5,7 @@ const authController = require("../controllers/authController.js");
 const connection = require("../database/db.js");
 
 
+
 //router para las vistas
 router.get("/", authController.isAuthenticated, (req, res) => {
   // Consulta SQL para obtener todas las recetas de la base de datos mediante el formulario
@@ -74,5 +75,9 @@ router.get("/logout", authController.logout);
 
 // Ruta para eliminar recetas
 router.get("/eliminar-receta/:id", authController.eliminarReceta);
+
+
+
+router.post("/modificar-receta/:id",authController.modificarReceta);
 
 module.exports = router;

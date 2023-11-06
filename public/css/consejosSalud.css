@@ -20,12 +20,9 @@ body {
     padding: 60px 0;
 }
 
-.container h2 {
-    color: darkorange;
-}
-
 .introduccion {
     margin-top: 50px;
+    color: darkorange;
 }
 
 .section-divider {
@@ -43,7 +40,7 @@ body {
 /* Clase para centrar el párrafo */
 .text-center {
     text-align: center;
-    color: darkgrey;
+    color: rgb(121, 118, 118);
     font-size: 18px;
   }
 
@@ -52,13 +49,13 @@ body {
 .subtitulo {
     text-align: center;
     font-weight: 300;
-    color: #972228;
+    color: darkorange;
     margin-bottom: 40px;
     font-size: 40px;
 }  
 
 .text-parrafo {
-    color: darkgrey;
+    color: rgb(121, 118, 118);
     margin-top: 40px;
     margin-bottom: 40px;
     font-size: 18px;
@@ -139,6 +136,10 @@ ol span {
   color:rgb(202, 132, 47)
 }
 
+.darkblue-text {
+  color: darkblue;
+}
+
   /*EL NIÑO - CONTROLES DE SALUD*/
    .smaller-width {
     max-width: 70px; /* el cuadro */
@@ -149,6 +150,24 @@ ol span {
     text-align: center;
     width: 100%;
     
+  }
+  .accidente {
+    text-align: center;
+    width: 100%;
+  }
+
+  .frase {
+    text-align: center;
+    color: orange;
+    font-weight: bold;
+    font-family: 'TuFuenteBonita', sans-serif; /* Reemplaza 'TuFuenteBonita' con la fuente que desees */
+    font-size: 24px; /* Tamaño de letra deseado */
+  }
+
+  .comillas {
+    font-size: 32px; /* Tamaño de las comillas deseado */
+    font-family: 'TuFuenteComillas', sans-serif; /* Reemplaza 'TuFuenteComillas' con la fuente que desees */
+    color: orange;
   }
 
   

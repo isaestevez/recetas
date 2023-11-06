@@ -258,6 +258,54 @@ exports.eliminarReceta = (req, res) => {
   });
 };
 
+
+
+exports.modificarReceta = (req, res) => {
+  let recetaId = req.params.id; // Obtiene el ID de la receta desde la URL
+  let tabla = req.query.tabla; // Obtiene el nombre de la tabla desde la URL
+  console.log("tabla",tabla)
+  let nuevosDatos = req.body; // Esto contiene todos los campos a modificar
+  console.log("nuevosDatos", nuevosDatos)
+
+  // Valida que la tabla sea válida
+  if (tabla !== "recetas" && tabla !== "recetas_base_datos") {
+    res.status(400).send("Tabla no válida");
+    return;
+  }
+
+ // Manejo de carga de imagen con multer
+ if (req.file) {
+  nuevosDatos.imagen = req.file.filename;
+}
+
+  // Construye la consulta SQL dinámicamente para actualizar los campos
+  let camposAActualizar = Object.keys(nuevosDatos);
+  let valoresAActualizar = camposAActualizar.map((campo) => nuevosDatos[campo]);
+
+  // Crea un arreglo de placeholders para los campos que se van a actualizar
+  let placeholders = camposAActualizar.map((campo) => `${campo} = ?`).join(", ");
+
+  // Construye la consulta SQL completa
+  let sql = `UPDATE ${tabla} SET ${placeholders} WHERE ${
+    tabla === "recetas" ? "idRecetas" : "idDB"
+  } = ?`;
+
+  valoresAActualizar.push(recetaId); // Agrega el ID de la receta al final de los valores
+
+  connection.query(sql, valoresAActualizar, (err, result) => {
+    console.log("Consulta SQL:", sql);
+    console.log("Valores a actualizar:", valoresAActualizar);
+    if (err) {
+      console.log("Error al modificar la receta: " + err);
+      res.status(500).send("Error al modificar la receta.");
+    } else {
+      console.log("Receta modificada con éxito");
+      res.status(200).send("Receta modificada con éxito");
+    }
+  });
+};
+
+
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
   return res.redirect("/login");

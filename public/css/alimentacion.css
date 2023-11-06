@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    scroll-behavior: smooth; /*controlar el comportamiento del scroll*/
+}
+
+body {
+     font-family: "Open Sans", sans-serif; 
+     /* font-family: 'Segoe UI', Tahoma, sans-serif;  */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+    margin: auto;
+    padding: 60px 0;
+}
+
+
+.subtitulo {
+    text-align: center;
+    font-weight: 100;
+    color:darkblue;
+    margin-bottom: 40px;
+    font-size: 40px;
+}
+
+.text-parrafo {
+    color: rgb(121, 118, 118);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+  span {
+    color: #972228;
+  }
+  
+  .title {
+      text-align: left;
+      margin-top: 40px;
+      color: darkblue;
+  }
+
+  .imgAlimentacion {
+    text-align: center;
+    width: 100%;
+    
+  }
+
+
+  /*lista ordenada ol*/
+  .blue-number-list {
+    list-style-type: none; /* Oculta los números predeterminados */
+    padding: 0; /* Elimina el relleno predeterminado de la lista ordenada */
+}
+
+.blue-number-list li:before {
+    content: counter(li); /* Muestra el número de lista original */
+    color: darkblue; /* Establece el color azul para los números */
+    font-weight: bold; /* Opcional: establece el peso de la fuente en negrita */
+    margin-right: 5px; /* Opcional: agrega espacio entre el número y el texto */
+}
+
+/* Restaura la numeración predeterminada de la lista ordenada */
+.blue-number-list {
+    counter-reset: li;
+}
+
+.blue-number-list li {
+    counter-increment: li;
+}
+
+ul {
+    color: #972228; /* Cambia el color del texto de la lista a rojo */
+  }
+
+  /* Estilo para los elementos de la lista (los ítems de la lista) */
+  ul li {
+    color: #972228; /* Cambia el color del texto de los ítems de la lista a rojo */
+  }
+
+  /* Estilo para los puntos de la lista */
+  ul li::before {
+    /*content: "•";  Cambia el contenido del punto a un círculo sólido (•) */
+    color: #972228; /* Cambia el color del punto a rojo */
+    display: inline-block;
+    width: 1em; /* Ajusta el ancho del punto según tus preferencias */
+    margin-right: 0.5em; /* Ajusta el espacio entre el punto y el texto del ítem de la lista */
+  }
+
+  .text-color {
+    color: #972228;
+  }
+
+  /*IMG GUIA ALIMENTARIA*/
+  .centered-img {
+    display: block;
+    margin: 0 auto;
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.img-thumbnail {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.frase {
+    text-align: center;
+    color: #972228;
+    font-weight: bold;
+    font-family: 'TuFuenteBonita', sans-serif; /* Reemplaza 'TuFuenteBonita' con la fuente que desees */
+    font-size: 24px; /* Tamaño de letra deseado */
+  }
+
+  .comillas {
+    font-size: 32px; /* Tamaño de las comillas deseado */
+    font-family: 'TuFuenteComillas', sans-serif; /* Reemplaza 'TuFuenteComillas' con la fuente que desees */
+  }

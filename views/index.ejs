@@ -17,7 +17,6 @@
     />
     <link href="css/carousel.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet" />
-    <link href="css/active-links.css" rel="stylesheet" />
     
   </head>
   <body>
@@ -35,14 +34,28 @@
           </div>
           <div class="carousel-item">
             <img
-              src="img/img2Conin.jpeg"
+              src="img/carrusel/imagenCarrusel4.jpeg"
               class="d-block w-100"
               alt="image2"
             />
           </div>
           <div class="carousel-item">
             <img
-              src="img/imagenCarrusel.webp"
+              src="img/carrusel/imagenCarrusel1.jpeg"
+              class="d-block w-100"
+              alt="image3"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="img/carrusel/imagenCarrusel2.jpeg"
+              class="d-block w-100"
+              alt="image3"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="img/carrusel/imagenCarrusel3.jpeg"
               class="d-block w-100"
               alt="image3"
             />
@@ -82,7 +95,7 @@
                 <a
                   href="#"
                   class="card-link"
-                  data-bs-receta-id="<%= receta.idRecetas %>"
+                  data-bs-receta-id="<%= receta.idDB %>"
                   data-bs-titulo="<%= receta.nombre %>"
                   data-bs-imagen="<%= receta.imagen_url %>"
                   data-bs-descripcion="<%= receta.tipo_receta %>"
@@ -110,6 +123,22 @@
                       data-tabla="recetas_base_datos"
                     >
                       Eliminar Recetas
+                    </button>
+                    <button
+                        class="btn btn-outline-primary modificar-receta"
+                        data-bs-receta-id="<%= receta.idDB %>"
+                        data-bs-tabla="recetas_base_datos"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalModificarReceta"
+                        data-bs-titulo="<%= receta.nombre %>"
+                        data-bs-descripcion="<%= receta.tipo_receta %>"
+                        data-bs-dificultad="<%= receta.dificultad_receta %>"
+                        data-bs-tiempo="<%= receta.tiempo_coccion %>"
+                        data-bs-ingredientes="<%= receta.ingredientes %>"
+                        data-bs-instrucciones="<%= receta.instrucciones %>"
+                        data-bs-imagen="<%= receta.imagen_url %>"
+                      >
+                        Modificar Receta
                     </button>
                 <% } %>    
                   </div>
@@ -151,14 +180,27 @@
                         >
                           Eliminar Recetas
                         </button>
+                        <button
+                            class="btn btn-outline-primary modificar-receta"
+                            data-bs-receta-id="<%= receta.idRecetas %>"
+                            data-bs-tabla="recetas"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalModificarReceta"
+                            data-bs-titulo="<%= receta.nombre %>"
+                            data-bs-descripcion="<%= receta.tipo_receta %>"
+                            data-bs-dificultad="<%= receta.dificultad_receta %>"
+                            data-bs-tiempo="<%= receta.tiempo_coccion %>"
+                            data-bs-ingredientes="<%= receta.ingredientes %>"
+                            data-bs-instrucciones="<%= receta.instrucciones %>"
+                            data-bs-imagen="<%= receta.imagen %>"
+                          >
+                            Modificar Receta
+                         </button>
                         <% } %>
                       </div>
                 </div>
 
               <% }); %>
-
-              <!-- Contenedor para los resultados de búsqueda -->
-              <div id="search-result"></div>
            
         </div>
       </div>
@@ -167,6 +209,70 @@
       <!-- FOOTER -->
       <%- include('footer.ejs') %>
     </main>
+    
+    <!-- Modal para modificar recetas -->
+    <div class="modal fade" id="modalModificarReceta" tabindex="-1" aria-labelledby="modalModificarRecetaLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalModificarRecetaLabel">Modificar Receta</h5>
+            <a href="/"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+          </div>
+          <div class="modal-body">
+            <form id="formModificarReceta" enctype="multipart/form-data">
+              <!-- Agrega campos del formulario para modificar los datos de la receta -->
+              <!-- Nombre de la Receta -->
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre de la Receta:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+
+            <!-- Tipo de Receta -->
+            <div class="mb-3">
+                <label for="tipo_receta" class="form-label">Tipo de Receta:</label>
+                <input type="text" class="form-control" id="tipo_receta" name="tipo_receta" required>
+            </div>
+
+            <!-- Dificultad de la Receta -->
+            <div class="mb-3">
+                <label for="dificultad_receta" class="form-label">Dificultad de la Receta:</label>
+                <input type="text" class="form-control" id="dificultad_receta" name="dificultad_receta" required>
+            </div>
+
+            <!-- Tiempo de Coccion -->
+            <div class="mb-3">
+                <label for="tiempo_coccion" class="form-label">Tiempo de Coccion:</label>
+                <input type="text" class="form-control" id="tiempo_coccion" name="tiempo_coccion" required>
+            </div>
+
+            <!-- Ingredientes -->
+            <div class="mb-3">
+                <label for="ingredientes" class="form-label">Ingredientes:</label>
+                <textarea class="form-control" id="ingredientes" name="ingredientes" rows="4"></textarea>
+            </div>
+
+            <!-- Instrucciones -->
+            <div class="mb-3">
+                <label for="instrucciones" class="form-label">Instrucciones:</label>
+                <textarea class="form-control" id="instrucciones" name="instrucciones" rows="4"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="imagen" class="form-label">Imagen de la Receta:</label>
+              <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+            </div>
+
+            <div class="mb-3 text-center">
+              <a href="/" class="btn btn-secondary">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+            
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Modal reutilizable -->
     <div
@@ -211,13 +317,14 @@
 </div>
 </div>
 
-    <!-- <script src="js/agregarReceta.js" ></script> -->
+   
+    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/modalDetalleRecetas.js"></script>
     <script src="js/busquedaRecetas.js"></script>
     <script src="js/eliminarRecetas.js"></script>
-    <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.1.3_dist_js_bootstrap.bundle.min.js"></script>
-    <script src="js/resaltarLinks.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/modificarRecetas.js"></script>
+    
     
   </body>
 </html>

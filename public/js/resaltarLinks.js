@@ -4,7 +4,7 @@
   console.log("Página actual:", currentPage);
 
   // Obtener todos los enlaces con la clase "active-link"
-  const links = document.querySelectorAll('.active-link');
+  const links = document.querySelectorAll('.nav-link');
 
   // Recorrer los enlaces y agregar la clase "active" al enlace coincidente
   links.forEach((link) => {
